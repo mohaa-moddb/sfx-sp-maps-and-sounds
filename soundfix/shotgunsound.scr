@@ -1,0 +1,51 @@
+main local.command:
+
+	if(level.shotgun != 1)
+	{
+	end
+	}
+
+	thread local.command
+
+
+
+end
+
+reload:
+
+self playsound shotgun_snd_reload_start
+
+end
+
+single:
+
+self playsound shotgun_snd_reload_single
+
+end
+
+end:
+
+self playsound shotgun_snd_reload_end
+
+end
+
+
+shoot:
+
+self playsound shotgun_snd_fire
+waitframe
+self playsound shotgun_snd_rechamber
+
+end
+
+raise:
+
+self playsound snd_shotgun_pullout
+
+end
+
+putaway:
+
+self playsound snd_shotgun_putaway
+
+end

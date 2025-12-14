@@ -1,0 +1,37 @@
+main local.command:
+
+	if(level.mp44 != 1)
+	{
+	end
+	}
+
+	thread local.command
+
+
+
+end
+
+reload:
+
+self playsound mp44_snd_reload item
+
+end
+
+
+shoot:
+
+self playsound mp44_snd_fire
+
+end
+
+raise:
+
+self playsound mp44_snd_pullout
+
+end
+
+putaway:
+
+self playsound mp44_snd_putaway
+
+end

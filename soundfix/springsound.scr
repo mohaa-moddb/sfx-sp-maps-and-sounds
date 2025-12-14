@@ -1,0 +1,42 @@
+main local.command:
+
+	if(level.springfield != 1)
+	{
+	end
+	}
+
+	thread local.command
+
+
+
+end
+
+start:
+
+self playsound springfield_snd_reload_start
+
+end
+
+single:
+
+self playsound springfield_snd_reload_single
+
+end
+
+end:
+
+self playsound springfield_snd_reload_end
+
+end
+
+rechamber:
+
+self playsound springfield_snd_bolt item
+
+end
+
+shoot:
+
+self playsound springfield_snd_fire
+
+end

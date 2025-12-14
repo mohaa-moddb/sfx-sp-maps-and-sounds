@@ -1,0 +1,226 @@
+//
+// M4l1
+//
+
+
+main: 
+
+	if((getcvar("g_gametype") == "1")) 
+	{
+	waitthread ffatype
+	end
+	}
+	else
+	{
+	waitthread tdmtype  
+	end
+	}
+end
+
+
+
+tdmtype:
+
+	setcvar "g_obj_alliedtext1"   "Map Name: M4L1" 
+	setcvar "g_obj_alliedtext2"   "Rendezvous with"
+	setcvar "g_obj_alliedtext3"  "the Resistance"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing4a.tga" 
+
+
+	setcvar "g_gametype" "2"
+	
+	waitthread tdm_spawns
+	
+
+	level waittill prespawn
+
+	exec global/door_locked.scr
+	exec global/ambient.scr m4l2
+	
+
+	level waittill spawn
+
+	level.clockside = kills
+
+		
+
+end
+
+
+
+
+ffatype:
+
+	setcvar "g_obj_alliedtext1"   "Map Name: M4L1" 
+	setcvar "g_obj_alliedtext2"   "Rendezvous with"
+	setcvar "g_obj_alliedtext3"  "the Resistance"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing4a.tga" 
+
+
+	setcvar "g_gametype" "1"
+	
+	waitthread ffa_spawns
+	
+	
+	level waittill prespawn
+
+	exec global/door_locked.scr
+	exec global/ambient.scr m4l2
+	
+
+	level waittill spawn
+
+	level.clockside = kills
+
+end
+
+
+
+tdm_spawns:
+
+	removeclass actor
+
+	level.springfield = 1								
+	level.bar = 1								
+	level.bazooka = 1
+	level.panzer = 1 
+	level.mp44 = 1		
+	level.shotgun = 1
+	//level.rifle = 1
+	
+	
+
+	spawn info_player_axis "origin" "4730.76 -2336.02 -5.43" "angle" "-125" "targetname" "X1"
+	spawn info_player_axis "origin" "4864.91 -2284.49 -16.09" "angle" "-127" "targetname" "X2"
+	spawn info_player_axis "origin" "4998.62 -2106.26 -34.05" "angle" "-115" "targetname" "X3"
+	spawn info_player_axis "origin" "4955.14 -1970.95 -53.32" "angle" "-117" "targetname" "X4"
+	spawn info_player_axis "origin" "4845.49 -1840.49 -63.70" "angle" "-107" "targetname" "X5"
+
+	spawn info_player_axis "origin" "4684.07 -1787.96 -73.24" "angle" "-102" "targetname" "X6" 
+	spawn info_player_axis "origin" "4692.44 -1691.59 -85.02" "angle" "-97" "targetname" "X7"
+	spawn info_player_axis "origin" "4837.58 -1638.77 -90.11" "angle" "-101" "targetname" "X8"
+	spawn info_player_axis "origin" "5002.83 -1623.74 -82.48" "angle" "-103" "targetname" "X9"
+	spawn info_player_axis "origin" "4934.52 -1525.71 -99.97" "angle" "-100" "targetname" "X10"
+
+	spawn info_player_axis "origin" "4830.19 -1450.66 -113.76" "angle" "-95" "targetname" "X11"
+	spawn info_player_axis "origin" "4664.44 -1385.85 -118.58" "angle" "-92" "targetname" "X12"
+	spawn info_player_axis "origin" "4618.84 -1311.00 -125.13" "angle" "-91" "targetname" "X13"
+	spawn info_player_axis "origin" "4753.05 -1228.40 -127.68" "angle" "-88" "targetname" "X14"
+	spawn info_player_axis "origin" "4257.72 -3583.97 125.55" "angle" "97" "targetname" "X15"
+
+
+	spawn info_player_allied "origin" "349.82 -5449.67 -116.77" "angle" "106" "targetname" "A1"
+	spawn info_player_allied "origin" "625.48 -5514.42 -95.88" "angle" "-8" "targetname" "A2"
+	spawn info_player_allied "origin" "1182.40 -5551.59 -95.88" "angle" "-10" "targetname" "A3"
+	spawn info_player_allied "origin" "1238.32 -5394.96 -95.88" "angle" "-21" "targetname" "A4"
+	spawn info_player_allied "origin" "1747.55 -5441.06 -77.93" "angle" "-56" "targetname" "A5" 
+
+	spawn info_player_allied "origin" "346.10 -5184.15 -123.07" "angle" "-22" "targetname" "A6"
+	spawn info_player_allied "origin" "3.60 -5504.04 -140.75" "angle" "80" "targetname" "A7"
+	spawn info_player_allied "origin" "-1028.94 -4950.36 -208.96" "angle" "8" "targetname" "A8"
+	spawn info_player_allied "origin" "-1132.38 -5114.17 -209.83" "angle" "13" "targetname" "A9"
+	spawn info_player_allied "origin" "-1282.82 -5273.78 -218.82" "angle" "7" "targetname" "A10"
+
+	spawn info_player_allied "origin" "-1420.89 -5233.30 -240.85" "angle" "11" "targetname" "A11"
+	spawn info_player_allied "origin" "-1611.98 -5092.66 -267.41" "angle" "8" "targetname" "A12"
+	spawn info_player_allied "origin" "-1726.32 -5205.63 -287.34" "angle" "8" "targetname" "A13"
+	spawn info_player_allied "origin" "-1828.14 -5003.13 -309.08" "angle" "1" "targetname" "A14"
+	spawn info_player_allied "origin" "-2061.02 -5237.40 -351.39" "angle" "7" "targetname" "A15"
+	
+	$altar solid
+	$altar_button solid
+	$altar_think_trigger remove
+	$altar_buttonpulse remove
+	//$altar_button playsound temp
+	$altar_button show
+	$altar_button time 1
+	$altar_button moveWest 2
+	$altar_button waitmove
+	$altar playsound m4l1_altar_slide
+	$altar thread slide $altar
+	$altar_button thread slide $altar_button
+
+end
+
+
+ffa_spawns: 
+
+	removeclass actor
+
+	level.springfield = 1								
+	level.bar = 1								
+	level.bazooka = 1
+	level.panzer = 1 
+	level.mp44 = 1		
+	level.shotgun = 1
+	//level.rifle = 1
+
+	spawn info_player_deathmatch "origin" "-5616.88 -2167.78 68.13" "angle" "6"
+	spawn info_player_deathmatch "origin" "-3353.43 -1609.72 219.66" "angle" "-28"
+	spawn info_player_deathmatch "origin" "-84.92 -2593.50 482.35" "angle" "-91"
+	spawn info_player_deathmatch "origin" "-3448.01 -6301.84 -22.90" "angle" "83"
+	spawn info_player_deathmatch "origin" "1509.62 -4944.87 -95.39" "angle" "85"
+
+	spawn info_player_deathmatch "origin" "1129.72 -904.86 337.46" "angle" "72"
+	spawn info_player_deathmatch "origin" "4724.54 2649.63 472.59" "angle" "-133"
+	spawn info_player_deathmatch "origin" "5876.39 564.04 692.25" "angle" "92"
+	spawn info_player_deathmatch "origin" "4703.13 1783.13 536.13" "angle" "5"
+	spawn info_player_deathmatch "origin" "709.42 1970.59 390.49" "angle" "-151"
+
+	spawn info_player_deathmatch "origin" "382.02 5031.92 68.13" "angle" "-57"
+	spawn info_player_deathmatch "origin" "-632.02 6897.30 112.85" "angle" "-174"
+	spawn info_player_deathmatch "origin" "-3267.78 6579.50 -41.95" "angle" "-99"
+	spawn info_player_deathmatch "origin" "-4865.88 6042.86 -135.25" "angle" "-44"
+	spawn info_player_deathmatch "origin" "-5200.03 1874.27 68.13" "angle" "29"
+
+	$altar solid
+	$altar_button solid
+	$altar_think_trigger remove
+	$altar_buttonpulse remove
+	//$altar_button playsound temp
+	$altar_button show
+	$altar_button time 1
+	$altar_button moveWest 2
+	$altar_button waitmove
+	$altar playsound m4l1_altar_slide
+	$altar thread slide $altar
+	$altar_button thread slide $altar_button
+end
+
+
+slide local.object:
+	local.object time 4
+	local.object moveWest 88
+	local.object waitmove
+end
+
+
+
+// End some labels
+plane_sequence:
+end
+endlevel:
+end
+friendly_think1:
+end
+truck01_drive:
+end
+lower_friendlydistance:
+end
+save2:
+end
+altar_think:
+end
+
+
+

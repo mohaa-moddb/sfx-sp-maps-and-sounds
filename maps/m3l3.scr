@@ -1,0 +1,812 @@
+//
+// M3l3 - The Nebelwerfer Hunt
+
+// Ive made this into 2 stages so players dont have to run too far for combat.
+// 
+// Cobs
+
+
+main: 
+
+	if((getcvar("g_gametype") == "1")) 
+	{
+	waitthread ffatype
+	end
+	}
+	else
+	{
+	waitthread tdmtype  
+	end
+	}
+end
+
+
+
+tdmtype:
+
+	setcvar "g_obj_alliedtext1"   "Map Name: M3L3" 
+	setcvar "g_obj_alliedtext2"    ""
+	setcvar "g_obj_alliedtext3" "The Nebelwerfer Hunt"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing3a.tga" 
+
+	setcvar "g_gametype" "2"
+
+	thread global/bomber.scr::main
+
+	waitthread tdm_spawns
+	waitthread Initiate_whats_needed
+
+	level waittill prespawn
+
+	thread global/door_locked.scr::lock
+	exec global/ambient.scr m3l3
+	
+	level waittill spawn
+
+	level.clockside = kills
+
+	
+	thread Map_Guard
+	thread Stage_Timer
+	
+	// Uncomment if you want the minefield on
+
+	//thread scene7_minefields
+
+end
+
+
+
+ffatype:
+
+	setcvar "g_obj_alliedtext1"   "Map Name: M3L3" 
+	setcvar "g_obj_alliedtext2"    ""
+	setcvar "g_obj_alliedtext3" "The Nebelwerfer Hunt"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing3a.tga" 
+	
+
+	
+	setcvar "g_gametype" "1"
+	
+	waitthread ffa_spawns
+	waitthread Initiate_whats_needed
+	
+	level waittill prespawn
+
+	thread global/door_locked.scr::lock
+	exec global/ambient.scr m3l3
+	
+	level waittill spawn
+
+	
+	level.clockside = kills
+
+	thread Map_Guard
+	
+
+	// Uncomment if you want the minefield on
+	//thread scene7_minefields
+end
+
+
+
+
+
+Initiate_whats_needed:
+	
+	// Remove AI
+	removeclass actor
+	
+	$world farplane 4000	
+	$world farplane_color (.62 .62 .61)
+	
+	// Relocate some origins for the Halftracks Mg42
+	$playertarget_center.origin = ( 3368 4000 0 ) 
+	$playertarget_front1.origin = ( 2752 3420 -144 ) 
+	$playertarget_front2.origin = ( 3056 3888 -128 ) 
+	$playertarget_right1.origin = ( 3076 3960 48 ) 
+	$playertarget_right2.origin = ( 2352 3968 -144 ) 
+	$playertarget_left1.origin = ( 1568 3936 -128 ) 
+	$playertarget_left2.origin = ( 3592 4224 -128 ) 
+
+	// Relocate the 2 P47s to re-bomb the Halftrack :)
+	$bomberpath.origin = ( 1543 -966 1319 )
+	$t546.origin = ( 1820 -796 1195 )
+	$t547.origin = ( 2239 -270 1085 )
+	$t548.origin = ( 2623 215 957 )
+	$t549.origin = ( 3489 1038 842 )
+	$t550.origin = ( 4193 1853 711 )
+	$t551.origin = ( 4366 2380 635 )
+	$t552.origin = ( 4357 3258 620 )
+	$t553.origin = ( 4542 4021 721 )
+	$t554.origin = ( 5518 5560 1804 )
+	$t555.origin = ( 7571 6339 2032 )
+
+	// Bomb path
+	$bomber.origin = ( 4411 2832 545 )
+	$t556.origin = ( 4423 2852 439 )
+	$t557.origin = ( 4481 3109 199 )
+	$t558.origin = ( 4529 3285 -23 )
+	$t559.origin = ( 4587 3405 -228 ) 
+
+	// 2nd Planes path
+	$t560.origin = ( 3211 2419 636 )
+	$t561.origin = ( 3041 1898 716 )
+	$t562.origin = ( 3472 3299 875 )
+	$t563.origin = ( 3678 4069 1177 )
+	$t564.origin = ( 6419 6387 2040 )
+	$t565.origin = ( 4638 5592 1812 )
+	$t566.origin = ( 2337 1086 850 )
+	$t567.origin = ( 1471 263 965 )
+	$t568.origin = ( 668 -748 1203 )
+	$t569.origin = ( 1087 -222 1093 )
+
+	//level.springfield = 1								
+	//level.bar = 1								
+	level.bazooka = 1	
+	level.mp44 = 1		
+	level.shotgun = 1
+	//level.rifle = 1 
+
+	$exploder remove 
+	$exploderchunk remove 
+
+	// Use this as Battlefield junk for Stage 2
+	$scene1_dead_panzer.origin = ( -4470.12 -3081.72 -175.88 )
+	$scene1_dead_panzer.angles = ( 3 39 0 )
+
+	// Its collision
+	$scene1_dead_panzer_mask.origin = $scene1_dead_panzer.origin
+	$scene1_dead_panzer_mask.angles = $scene1_dead_panzer.angles
+
+	$scene4_tank.origin = ( 2910.91 1514.95 -276.96 )
+	$scene4_tank.angles = ( -7.35 47.67 0.00 )
+
+	// Set its collision
+	$scene4_tank_barrel_collision notsolid
+	$scene4_tank setcollisionentity $tigertank_mask
+
+	$tigertank_mask notsolid
+
+	$scene4_tank.gun = $scene4_tank QueryTurretSlotEntity 0
+	$scene4_tank.gun setaimtarget $scene4_tankshot1_trigger
+
+	$scene4_tank nodamage
+
+	$scene4_tank loopsound tank_snd_idle
+
+	// Relocate the Halftrack to the street
+	$halftrack.origin = ( 4568 3412 -259 )
+	$halftrack.angles = ( 0 150 0 )
+	$halftrack setcollisionentity $halftrack_mask
+
+	// Set Halftrack up with health bit
+	$halftrack thread global/vehicles_thinkers.scr::enemy_half-trak_think
+	$halftrack.health = 300
+	$halftrack attachmodel "vehicles/sdkfz_shield.tik" "shield" 1.5 "halftrack_gunnershield"
+	$halftrack_gunnershield.angles = (0 270 0)
+
+	$scene7_mg1 maxyawoffset 45
+	$scene7_mg1 pitchcaps (0 5 0)
+
+	$scene7_mg4 maxyawoffset 45
+	$scene7_mg4 pitchcaps (0 5 0)
+
+	$scene7_mg5 maxyawoffset 45
+	$scene7_mg5 pitchcaps (0 5 0)
+
+	$scene0_destroyed_flak88 exec global/loopsound.scr fire_med
+
+	$scene0_panzerschreck remove
+	$scene0_shell1 remove
+	$scene0_shell2 remove
+	$scene0_shell3 remove
+	$scene0_shell4 remove
+	$scene0_shell5 remove
+	$scene0_shell6 remove
+	$scene0_shell7 remove
+
+	$scene4_tank_radiusdamage_source remove
+
+	$scene7_nebelwerfer1_weaponmask.origin = $scene7_nebelwerfer1.origin
+	$scene7_nebelwerfer2_weaponmask.origin = $scene7_nebelwerfer2.origin
+	$scene7_nebelwerfer3_weaponmask.origin = $scene7_nebelwerfer3.origin
+	$scene7_nebelwerfer4_weaponmask.origin = $scene7_nebelwerfer4.origin
+
+	$scene7_nebelwerfer1_weaponmask.angles = $scene7_nebelwerfer1.angles
+	$scene7_nebelwerfer2_weaponmask.angles = $scene7_nebelwerfer2.angles
+	$scene7_nebelwerfer3_weaponmask.angles = $scene7_nebelwerfer3.angles
+	$scene7_nebelwerfer4_weaponmask.angles = $scene7_nebelwerfer4.angles
+
+	$scene7_nebelwerfer1 nodamage	
+	$scene7_nebelwerfer2 nodamage
+	$scene7_nebelwerfer3 nodamage
+	$scene7_nebelwerfer4 nodamage
+
+	$scene7_solid_bombpoint1 show
+	$scene7_nebelwerfer1_destroyed remove
+	$scene7_solid_bombpoint2 show
+	$scene7_nebelwerfer2_destroyed remove
+	$scene7_solid_bombpoint3 show
+	$scene7_nebelwerfer3_destroyed remove
+	$scene7_solid_bombpoint4 show
+	$scene7_nebelwerfer4_destroyed remove
+
+	thread global/bomber.scr::main	
+
+	local.master = spawn scriptmaster
+	local.master aliascache tank_snd_idle sound/vehicle/veh_tank_idle1.wav soundparms 0.5 0.0 0.9 0.0 800 4000 auto streamed maps "m dm obj"
+	local.master aliascache m3l2_first_airstrike sound/vehicle/plane4.wav soundparms 1.5 0.0 1.0 0.0 10000 16000 weapon streamed maps "m dm moh obj train"
+	local.master aliascache m3l2_second_airstrike sound/vehicle/plane4.wav soundparms 1.5 0.0 1.0 0.0 10000 16000 weapon streamed maps "m dm moh obj train"
+	local.master aliascache drop_bomb6 sound/weapons/explo/Exp_LeadIn_11.wav soundparms 0.9 0.2 0.7 0.5 160 9000 auto loaded maps "m dm moh obj train"
+	local.master aliascache drop_bomb7 sound/weapons/explo/Exp_LeadIn_12.wav soundparms 0.9 0.2 0.7 0.5 160 9000 auto loaded maps "m dm moh obj train"
+	local.master aliascache drop_bomb8 sound/weapons/explo/Exp_LeadIn_13.wav soundparms 0.9 0.2 0.7 0.5 160 9000 auto loaded maps "m dm moh obj train"
+
+
+
+	// Plank of wood mod (unused) - enable if you like - near where tank blew holes in the wall :)
+
+	//spawn func_beam "targetname" "plank" origin ( 4467.67 1347.27 -307.42 )  endpoint ( 4772.31 1339.58 -135.88 ) maxoffset 1
+	//$plank.scale = 5
+	//$plank shader ("textures/general_structure/woodgate")
+	//$plank numsegments 1
+	
+
+	// plank of wood mods solid bit
+
+	//spawn script_object "targetname" "solidbit"
+	//$solidbit.origin = ( 4467.67 1347.27 -307.42 )
+	//$solidbit setsize ( -5 -3 0 ) ( 5 3 250 )
+	//$solidbit.angles = ( 45 0 0 ) 
+	//$solidbit solid
+	//$solidbit nodamage
+
+
+	// Uncomment if you want the Halftrack to fire at preset targets  ;)
+	// $halftrack.mg42 thread halftrack_mg_targeting 
+
+end
+
+
+scene7_minefields:
+
+	thread global/minefield.scr::minefield_setup
+end
+
+
+
+
+Map_Guard:
+
+	// Stage 1 Allies Spawn rear (stops them going to original single player start area)
+	spawn script_object "targetname" "blocker1"
+	$blocker1.origin = ( -1065.59 5157.19 -140.40 )
+	$blocker1 setsize ( -500 -1 0 ) ( 500 1 500 )
+	$blocker1 solid
+	$blocker1 nodamage
+
+	// Stage 1 Axis Spawn rear (stops them going to church area)
+	spawn script_object "targetname" "blocker2"
+	$blocker2.origin = ( 5457.83 -1320.66 -417.62 )
+	$blocker2 setsize ( -500 -1 0 ) ( 500 1 500 )
+	$blocker2 solid
+	$blocker2 nodamage
+
+	// Stage 2 - Stops them going to church area from Nebelwerfer area
+	spawn script_object "targetname" "blocker3"
+	$blocker3.origin = ( -371.05 -593.10 -281.11 )
+	$blocker3 setsize ( -1 -300 0 ) ( 1 300 500 )
+	$blocker3 solid
+	$blocker3 nodamage
+
+	spawn trigger_multipleall "targetname" "Killah"
+	$Killah.origin = ( 2561.14 1418.73 -511.88 ) 
+	$Killah setsize ( -9999 -9999 -100 ) ( 9999 9999 10 )
+	$Killah setthread die
+	$Killah message "Play fair!"
+end
+
+die:
+	local.punk = parm.other
+	local.punk kill
+end	
+
+
+halftrack_mg_targeting:
+
+	
+	// half track relocated targets
+
+	$playertarget_center.origin = ( 3368 4000 0 ) 
+	$playertarget_front1.origin = ( 2752 3420 -144 ) 
+	$playertarget_front2.origin = ( 3056 3888 -128 ) 
+	$playertarget_right1.origin = ( 3076 3960 48 ) 
+	$playertarget_right2.origin = ( 2352 3968 -144 ) 
+	$playertarget_left1.origin = ( 1568 3936 -128 ) 
+	$playertarget_left2.origin = ( 3592 4224 -128 )	
+
+	if !(isAlive $halftrack)
+	end
+
+	self maxyawoffset 55
+	self bulletdamage 5 // Just for show this 1 so less damage ;)
+	self bulletspread 90 90 
+	self startfiring		
+	
+	self setaimtarget $playertarget_front1
+	wait 1.25 		
+	if !(isAlive $halftrack)
+	end
+				
+	self setaimtarget $playertarget_front2
+	wait 0.75 	
+	if !(isAlive $halftrack)
+	end
+		
+	self setaimtarget $playertarget_right1
+	wait 2.2 	
+	if !(isAlive $halftrack)
+	end
+
+	self setaimtarget $playertarget_right2
+	wait 1.4 	
+	if !(isAlive $halftrack)
+	end
+
+	self setaimtarget $playertarget_left1
+	wait 1.8 	
+	if !(isAlive $halftrack)
+	end
+
+	self setaimtarget $playertarget_left2
+	wait 1.6 	
+	if !(isAlive $halftrack)
+	end
+
+	self setaimtarget $playertarget_center
+	wait 1.6 	
+	if !(isAlive $halftrack)
+	end
+
+	self stopfiring
+
+	wait 15
+		
+	if !(isAlive $halftrack)
+	end
+	
+	goto halftrack_mg_targeting
+end	
+
+trigger_bomber:
+end
+
+
+
+bomb_explodes:
+	
+	$halftrack.health = 1
+	radiusdamage ( ($halftrack.origin) + (0 0 16) ) 200 200
+	wait 2
+	$bomber playsound dfr_m3l3_add10 
+end
+
+
+
+tdm_spawns:
+
+	// stage 1 
+	spawn info_player_axis "origin" "2731.56 319.39 -312.61" "angle" "51" "targetname" "X1"
+	spawn info_player_axis "origin" "2945.53 47.21 -327.88" "angle" "52" "targetname" "X2"
+	spawn info_player_axis "origin" "2977.57 -104.87 -327.88" "angle" "69" "targetname" "X3"
+	spawn info_player_axis "origin" "3122.81 -19.49 -135.88" "angle" "106" "targetname" "X4"
+	spawn info_player_axis "origin" "3274.44 -422.32 -341.38" "angle" "63" "targetname" "X5"
+
+	spawn info_player_axis "origin" "3118.63 -1194.88 -343.88" "angle" "64" "targetname" "X6" 
+	spawn info_player_axis "origin" "3596.45 -1088.91 -335.88" "angle" "94" "targetname" "X7"
+	spawn info_player_axis "origin" "3977.25 -1045.36 -331.35" "angle" "108" "targetname" "X8"
+	spawn info_player_axis "origin" "4008.88 -816.87 -328.46" "angle" "110" "targetname" "X9"
+	spawn info_player_axis "origin" "4250.15 -617.14 -343.88" "angle" "145" "targetname" "X10"
+
+	spawn info_player_axis "origin" "4008.04 -284.19 -344.05" "angle" "124" "targetname" "X11"
+	spawn info_player_axis "origin" "4163.18 144.58 -346.76" "angle" "138" "targetname" "X12"
+	spawn info_player_axis "origin" "4333.07 112.60 -345.71" "angle" "145" "targetname" "X13"
+	spawn info_player_axis "origin" "3891.27 660.35 -330.59" "angle" "145" "targetname" "X14"
+	spawn info_player_axis "origin" "4180.61 -293.99 -335.88" "angle" "133" "targetname" "X15"
+
+	
+	
+	spawn info_player_allied "origin" "1305.46 5339.00 -212.33" "angle" "-72" "targetname" "A1"
+	spawn info_player_allied "origin" "1048.16 5175.07 -209.07" "angle" "-47" "targetname" "A2"
+	spawn info_player_allied "origin" "894.91 5392.25 -202.74" "angle" "-43" "targetname" "A3"
+	spawn info_player_allied "origin" "908.53 5623.65 -200.80" "angle" "-52" "targetname" "A4"
+	spawn info_player_allied "origin" "812.37 5781.73 -198.15" "angle" "-51" "targetname" "A5" 
+
+	spawn info_player_allied "origin" "556.46 5713.40 -192.16" "angle" "-40" "targetname" "A6"
+	spawn info_player_allied "origin" "554.96 5907.67 -191.63" "angle" "-47" "targetname" "A7"
+	spawn info_player_allied "origin" "407.26 5937.21 -187.67" "angle" "-44" "targetname" "A8"
+	spawn info_player_allied "origin" "1289.99 4415.22 -221.47" "angle" "2" "targetname" "A9"
+	spawn info_player_allied "origin" "1421.66 4633.33 -229.23" "angle" "-67" "targetname" "A10"
+
+	spawn info_player_allied "origin" "1946.40 4887.60 -201.88" "angle" "-28" "targetname" "A11"
+	spawn info_player_allied "origin" "2224.25 4876.31 -206.62" "angle" "-31" "targetname" "A12"
+	spawn info_player_allied "origin" "2467.07 4880.88 -203.65" "angle" "-41" "targetname" "A13"
+	spawn info_player_allied "origin" "1626.24 2893.21 -237.01" "angle" "33" "targetname" "A14"
+	spawn info_player_allied "origin" "1280.78 3795.54 -210.76" "angle" "35" "targetname" "A15"
+	
+
+
+	// stage2
+	spawn info_player_axis "origin" "-1823.71 -7143.00 -166.47" "angle" "91" "targetname" "XX1"
+	spawn info_player_axis "origin" "-2003.20 -7201.17 -157.21" "angle" "102" "targetname" "XX2"
+	spawn info_player_axis "origin" "-2251.77 -7170.95 -120.00" "angle" "74" "targetname" "XX3"
+	spawn info_player_axis "origin" "-2571.07 -7085.22 -52.79" "angle" "101" "targetname" "XX4"
+	spawn info_player_axis "origin" "-4245.39 -6720.00 -135.88" "angle" "-148" "targetname" "XX5"
+
+	spawn info_player_axis "origin" "-4549.51 -7013.10 -135.88" "angle" "74" "targetname" "XX6" 
+	spawn info_player_axis "origin" "-4782.28 -6777.69 -135.88" "angle" "-9" "targetname" "XX7"
+	spawn info_player_axis "origin" "-4874.76 -6624.16 -135.88" "angle" "-32" "targetname" "XX8"
+	spawn info_player_axis "origin" "-5214.08 -6639.20 -135.88" "angle" "-165" "targetname" "XX9"
+	spawn info_player_axis "origin" "-5418.29 -6315.10 -135.88" "angle" "-140" "targetname" "XX10"
+
+	spawn info_player_axis "origin" "-6698.61 -6656.00 -135.88" "angle" "35" "targetname" "XX11"
+	spawn info_player_axis "origin" "-6565.78 -6787.15 -135.88" "angle" "53" "targetname" "XX12"
+	spawn info_player_axis "origin" "-6439.04 -6915.57 -135.88" "angle" "69" "targetname" "XX13"
+	spawn info_player_axis "origin" "-6281.70 -7072.91 -135.88" "angle" "87" "targetname" "XX14"
+	spawn info_player_axis "origin" "-6111.53 -6922.14 -135.88" "angle" "114" "targetname" "XX15"
+
+
+
+	spawn info_player_allied "origin" "-2016.64 -1480.75 -204.14" "angle" "-141" "targetname" "AA1"
+	spawn info_player_allied "origin" "-1746.41 -1924.13 -175.40" "angle" "-118" "targetname" "AA2"
+	spawn info_player_allied "origin" "-1558.55 -2363.77 -161.64" "angle" "-129" "targetname" "AA3"
+	spawn info_player_allied "origin" "-2414.82 -1949.22 -174.86" "angle" "-107" "targetname" "AA4"
+	spawn info_player_allied "origin" "-2786.90 -1855.70 -257.40" "angle" "-117" "targetname" "AA5" 
+
+	spawn info_player_allied "origin" "-3121.64 -1861.73 -267.73" "angle" "-112" "targetname" "AA6"
+	spawn info_player_allied "origin" "-3346.26 -1860.94 -264.16" "angle" "-112" "targetname" "AA7"
+	spawn info_player_allied "origin" "-3598.17 -1851.59 -255.73" "angle" "-102" "targetname" "AA8"
+	spawn info_player_allied "origin" "-3840.22 -1782.89 -260.63" "angle" "-103" "targetname" "AA9"
+	spawn info_player_allied "origin" "-4122.37 -1725.78 -260.20" "angle" "-100" "targetname" "AA10"
+
+	spawn info_player_allied "origin" "-4484.43 -1723.68 -247.80" "angle" "-115" "targetname" "AA11"
+	spawn info_player_allied "origin" "-4642.74 -1724.88 -234.30" "angle" "-105" "targetname" "AA12"
+	spawn info_player_allied "origin" "-4056.12 -1448.37 -175.88" "angle" "-97" "targetname" "AA13"
+	spawn info_player_allied "origin" "-2629.58 -1674.97 -175.94" "angle" "-121" "targetname" "AA14"
+	spawn info_player_allied "origin" "-1708.30 -2043.60 -170.12" "angle" "-117" "targetname" "AA15"
+
+
+	$XX1 disablespawn
+	$XX2 disablespawn
+	$XX3 disablespawn
+	$XX4 disablespawn
+	$XX5 disablespawn
+	$XX6 disablespawn
+	$XX7 disablespawn
+	$XX8 disablespawn
+	$XX9 disablespawn
+	$XX10 disablespawn
+	$XX11 disablespawn
+	$XX12 disablespawn
+	$XX13 disablespawn
+	$XX14 disablespawn
+	$XX15 disablespawn
+
+	$AA1 disablespawn
+	$AA2 disablespawn
+	$AA3 disablespawn
+	$AA4 disablespawn
+	$AA5 disablespawn
+	$AA6 disablespawn
+	$AA7 disablespawn
+	$AA8 disablespawn
+	$AA9 disablespawn
+	$AA10 disablespawn
+	$AA11 disablespawn
+	$AA12 disablespawn
+	$AA13 disablespawn
+	$AA14 disablespawn
+	$AA15 disablespawn
+
+
+end
+
+
+
+
+
+
+Stage_Timer:
+
+	// best set for 7 mins per stage
+	
+	wait 10
+
+	local.messagetosay = "S T A G E  1 ... S T R E E T  C O M B A T"
+	thread scrollMsg local.messagetosay
+
+	wait 58
+
+	// Initiate the Relocated P-47s that takes out the Halftrack :)
+
+	thread global/bomber.scr::bomb 1
+	wait 1
+	$bomberplane1 playsound m3l2_first_airstrike
+
+	thread global/bomber.scr::bomb 2
+	wait 1
+	$bomberplane2 playsound m3l2_second_airstrike
+
+	wait 388 
+
+	$X1 disablespawn
+	$X2 disablespawn
+	$X3 disablespawn
+	$X4 disablespawn
+	$X5 disablespawn
+	$X6 disablespawn
+	$X7 disablespawn
+	$X8 disablespawn
+	$X9 disablespawn
+	$X10 disablespawn
+	$X11 disablespawn
+	$X12 disablespawn
+	$X13 disablespawn
+	$X14 disablespawn
+	$X15 disablespawn
+
+	$A1 disablespawn
+	$A2 disablespawn
+	$A3 disablespawn
+	$A4 disablespawn
+	$A5 disablespawn
+	$A6 disablespawn
+	$A7 disablespawn
+	$A8 disablespawn
+	$A9 disablespawn
+	$A10 disablespawn
+	$A11 disablespawn
+	$A12 disablespawn
+	$A13 disablespawn
+	$A14 disablespawn
+	$A15 disablespawn
+
+	$XX1 enablespawn
+	$XX2 enablespawn
+	$XX3 enablespawn
+	$XX4 enablespawn
+	$XX5 enablespawn
+	$XX6 enablespawn
+	$XX7 enablespawn
+	$XX8 enablespawn
+	$XX9 enablespawn
+	$XX10 enablespawn
+	$XX11 enablespawn
+	$XX12 enablespawn
+	$XX13 enablespawn
+	$XX14 enablespawn
+	$XX15 enablespawn
+
+	$AA1 enablespawn
+	$AA2 enablespawn
+	$AA3 enablespawn
+	$AA4 enablespawn
+	$AA5 enablespawn
+	$AA6 enablespawn
+	$AA7 enablespawn
+	$AA8 enablespawn
+	$AA9 enablespawn
+	$AA10 enablespawn
+	$AA11 enablespawn
+	$AA12 enablespawn
+	$AA13 enablespawn
+	$AA14 enablespawn
+	$AA15 enablespawn
+
+	// Relocate this tank for show/cover in Stage 2
+	$scene4_tank.origin = ( -4632.10 -6405.15 -50.30 )
+	$scene4_tank.angle = 111
+
+	$player respawn
+
+	local.messagetosay = "S T A G E  2 ...  T H E  B A T T L E F I E L D "
+	thread scrollMsg local.messagetosay
+
+end
+
+
+
+
+ffa_spawns: 
+
+	spawn info_player_deathmatch "origin" "2201.55 -2803.98 -247.88" "angle" "63"
+	spawn info_player_deathmatch "origin" "4047.13 -879.13 -332.53" "angle" "-64"
+	spawn info_player_deathmatch "origin" "5579.18 -2977.96 -368.85" "angle" "98"
+	spawn info_player_deathmatch "origin" "3010.44 -443.81 -351.59" "angle" "-54"
+	spawn info_player_deathmatch "origin" "3471.13 2736.88 -279.09" "angle" "-88"
+
+	spawn info_player_deathmatch "origin" "4448.87 1792.88 -271.87" "angle" "-161"
+	spawn info_player_deathmatch "origin" "5552.87 2152.88 -303.88" "angle" "-139"
+	spawn info_player_deathmatch "origin" "5433.62 3161.92 -341.63" "angle" "-150"
+	spawn info_player_deathmatch "origin" "4327.87 4321.51 -242.30" "angle" "-89"
+	spawn info_player_deathmatch "origin" "3568.88 2783.13 -263.50" "angle" "95"
+
+	spawn info_player_deathmatch "origin" "3176.88 3983.13 -39.88" "angle" "157"
+	spawn info_player_deathmatch "origin" "2425.45 4877.13 -206.03" "angle" "-45"
+	spawn info_player_deathmatch "origin" "1495.16 3046.49 -229.43" "angle" "-7"
+	spawn info_player_deathmatch "origin" "3168.87 3077.64 -247.88" "angle" "-168"
+	spawn info_player_deathmatch "origin" "4592.87 -3696.87 -353.88" "angle" "124"
+end
+
+
+
+// End some labels
+scene4_tank_initialize:
+end
+scene4_tank_sequence:
+end
+scene7_mgspawn3_terminate:
+end
+scene7_mgspawn2_terminate:
+end
+scene7_neb4_terminate:
+end
+scene7_neb3_terminate:
+end
+scene7_neb2_terminate:
+end
+scene7_bombplant4:
+end
+scene7_bombplant3:
+end
+scene7_bombplant2:
+end
+scene7_bombplant1:
+end
+scene7_neb1_terminate:
+end
+scene4_tank_feedback:
+end
+scene4_tank_death:
+end
+scene4_tank_hint:
+end
+scene4_tank_move local.path:
+end
+scene4_drive_path local.path local.speed:
+end
+scene4_tank_targeting:
+end
+scene4_tank_attack1:
+end
+scene4_tank_attack2:
+end
+scene4_tank_attack3:
+end
+scene4_tank_attack4:
+end
+scene4_tank_attack5:
+end
+scene4_tank_shoot_target local.targetpoint:
+end
+scene4_tank_shoot_player local.targetplayer:
+end
+scene4_manualgun1:
+end
+scene4_manualgun1_targeting local.gunner:
+end
+farplane_near:
+end
+scene3_spawn5_terminate:
+end
+scene7_spawn3_terminate:
+end
+scene7_spawn2_terminate:
+end
+scene4_spawn1_terminate:
+end
+scene4_panzerschreck_trigger:
+end
+scene1_waveterminate_trigger:
+end
+scene7_mgspawn5_terminate:
+end
+scene7_mgspawn4_terminate:
+end
+scene7_mgspawn1_terminate:
+end
+scene6_mgspawn3_terminate:
+end
+scene6_mgspawn2_terminate:
+end
+scene6_mgspawn1_terminate:
+end
+scene6_spawn2_terminate:
+end
+scene6_spawn1_terminate:
+end
+scene4_spawn4_terminate:
+end
+scene4_spawn3_terminate:
+end
+scene4_spawn2_terminate:
+end
+scene3_spawn4_terminate:
+end
+scene3_sniperboardspawn:
+end
+scene3_spawn3_terminate:
+end
+scene3_spawn2_terminate:
+end
+scene3_spawn1_terminate:
+end
+scene1:
+end
+scene3:
+end
+scene7:
+end
+scene4:
+end
+scene4_mgfodderspawn_deactivate:
+end
+scene6:
+end
+scene0_panzerschreck_trigger:
+end
+scene7_defender_spawn1:
+end
+scene7_spawn1_terminate:
+end
+scene4_team_regroup:
+end
+farplane_far:
+end
+scene4_captain_hint:
+end
+// Blergh
+
+
+
+scrollMsg local.messagetosay:
+
+	huddraw_align 223 left center
+	huddraw_font 223 facfont-20
+	huddraw_alpha 223 1
+
+	huddraw_color 223 1 1 1
+
+	huddraw_rect 223 20 150 200 40
+	huddraw_string 223 local.messagetosay
+
+	for(local.i=1;local.i<=local.messagetosay.size;local.i++)
+	{
+	local.x = ""
+	for(local.z=1;local.z<=(local.messagetosay.size - local.i);local.z++)
+	{
+	local.x = (local.x + " ")
+	}
+	local.tmpstring4 = ""
+	for (local.o=0;local.o<local.i;local.o++) local.tmpstring4 = local.tmpstring4 + local.messagetosay[local.o]
+	huddraw_string 223 (local.x + local.tmpstring4)
+	wait .03
+	}
+	wait 3
+	for (local.o=1;local.o>0;local.o=local.o - 0.01)
+	{
+	huddraw_alpha 223 local.o
+	wait 0.05
+	}
+	huddraw_alpha 223 0 
+end

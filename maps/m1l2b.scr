@@ -1,0 +1,313 @@
+//
+// M1L2B - Sabotage the Motorpool
+//
+
+
+main: 
+
+	if((getcvar("g_gametype") == "1")) 
+	{
+	waitthread ffatype
+	end
+	}
+	else
+	{
+	waitthread tdmtype  
+	end
+	}
+end
+
+
+
+tdmtype:
+
+	setcvar "g_obj_alliedtext1" "Map Name: M1L2B" 
+	setcvar "g_obj_alliedtext2" ""
+	setcvar "g_obj_alliedtext3" "Sabotage the Motorpool"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing1a.tga" 
+
+	setcvar "g_gametype" "2"
+	
+	waitthread tdm_spawns
+	waitthread set_da_stuff_up
+
+	level waittill prespawn
+
+	exec global/door_locked.scr
+	exec global/ambient.scr m1l2b
+	
+	level waittill spawn
+
+	level.clockside = kills
+
+end
+
+
+
+
+ffatype:
+
+	setcvar "g_obj_alliedtext1" "Map Name: M1L2B" 
+	setcvar "g_obj_alliedtext2" ""
+	setcvar "g_obj_alliedtext3" "Sabotage the Motorpool"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing1a.tga" 
+
+	setcvar "g_gametype" "1"
+	
+	waitthread ffa_spawns
+	waitthread set_da_stuff_up
+	
+	level waittill prespawn
+
+	exec global/door_locked.scr
+	exec global/ambient.scr m1l2b
+	
+	level waittill spawn
+
+	level.clockside = kills
+
+end
+
+
+
+
+tdm_spawns:
+
+	spawn info_player_axis "origin" "1172.30 -17.30 -255.88" "angle" "24"
+	spawn info_player_axis "origin" "865.45 -349.43 -255.88" "angle" "45"
+	spawn info_player_axis "origin" "1791.91 -97.31 -255.88" "angle" "-178"
+	spawn info_player_axis "origin" "1960.68 -572.83 -255.88" "angle" "162"
+	spawn info_player_axis "origin" "928.55 -476.59 -255.88" "angle" "14"
+
+	spawn info_player_axis "origin" "629.62 -760.87 -255.88" "angle" "17"
+	spawn info_player_axis "origin" "741.97 -1105.29 -255.88" "angle" "42"
+	spawn info_player_axis "origin" "1072.36 -1271.22 -255.88" "angle" "68"
+	spawn info_player_axis "origin" "1442.66 -1453.56 -255.88" "angle" "94"
+	spawn info_player_axis "origin" "2007.28 -1269.84 -255.88" "angle" "128"
+
+	spawn info_player_axis "origin" "2338.52 -830.18 -255.88" "angle" "166"
+	spawn info_player_axis "origin" "2096.90 -1883.64 -255.88" "angle" "116"
+	spawn info_player_axis "origin" "1855.23 -587.62 -255.88" "angle" "161"
+	spawn info_player_axis "origin" "851.69 -529.24 -255.88" "angle" "15"
+	spawn info_player_axis "origin" "884.99 -3.35 -255.88" "angle" "61"
+
+
+	spawn info_player_allied "origin" "-3066.07 1861.97 -255.88" "angle" "43"
+	spawn info_player_allied "origin" "-3571.20 2315.61 -255.88" "angle" "-5"
+	spawn info_player_allied "origin" "-3817.19 1887.51 -255.88" "angle" "9"
+	spawn info_player_allied "origin" "-3552.67 2519.13 -255.88" "angle" "20"
+	spawn info_player_allied "origin" "-4081.86 2720.45 -255.88" "angle" "1"
+
+	spawn info_player_allied "origin" "-4174.65 2994.94 -255.88" "angle" "28"
+	spawn info_player_allied "origin" "-4160.58 3445.80 -255.88" "angle" "32"
+	spawn info_player_allied "origin" "-4244.94 3892.93 -255.88" "angle" "16"
+	spawn info_player_allied "origin" "-4093.44 4417.86 -255.88" "angle" "-14"
+	spawn info_player_allied "origin" "-3623.25 3844.27 -255.88" "angle" "38"
+
+	spawn info_player_allied "origin" "-2718.76 4793.78 -255.88" "angle" "-83"
+	spawn info_player_allied "origin" "-3099.58 4068.28 -255.88" "angle" "-42"
+	spawn info_player_allied "origin" "-3090.31 3632.04 -255.88" "angle" "-9"
+	spawn info_player_allied "origin" "-3128.12 3122.16 -255.88" "angle" "-39"
+	spawn info_player_allied "origin" "-2670.05 2341.77 -255.88" "angle" "65"	 
+
+end
+
+
+ffa_spawns:
+
+	spawn info_player_deathmatch "origin" "-3136.82 4743.65 -255.88" "angle" "-65"
+	spawn info_player_deathmatch "origin" "-4272.87 3655.13 -255.88" "angle" "20"
+	spawn info_player_deathmatch "origin" "-3652.74 2465.17 -255.88" "angle" "43"
+	spawn info_player_deathmatch "origin" "-3495.53 2311.75 -255.88" "angle" "-4"
+	spawn info_player_deathmatch "origin" "-1108.63 3865.90 -255.88" "angle" "-154"
+
+	spawn info_player_deathmatch "origin" "-979.43 3129.17 -255.88" "angle" "-91"
+	spawn info_player_deathmatch "origin" "112.16 2916.67 -255.88" "angle" "-131"
+	spawn info_player_deathmatch "origin" "1053.43 1553.56 -255.88" "angle" "80"
+	spawn info_player_deathmatch "origin" "1370.53 1408.87 -255.88" "angle" "-29"
+	spawn info_player_deathmatch "origin" "1174.53 -24.10 -255.88" "angle" "32"
+
+	spawn info_player_deathmatch "origin" "1673.07 -95.13 -255.88" "angle" "178"
+	spawn info_player_deathmatch "origin" "616.45 -293.81 -255.88" "angle" "-46"
+	spawn info_player_deathmatch "origin" "294.79 -1917.40 -255.88" "angle" "47"
+	spawn info_player_deathmatch "origin" "2224.87 1896.34 -255.88" "angle" "153"
+	spawn info_player_deathmatch "origin" "-1905.67 1871.13 -255.88" "angle" "27"
+
+end
+
+
+
+set_da_stuff_up:
+	
+	// Some sounds
+	local.master = spawn scriptmaster
+	local.master aliascache opeltruck_snd_idle sound/vehicle/veh_truck_idle.wav soundparms 1.0 0.0 1.0 0.0 300 7000 auto loaded maps "m dm obj"
+	local.master aliascache tank_snd_move sound/vehicle/veh_tank_turret1.wav soundparms 0.9 0.2 0.9 0.2 800 4000 auto loaded maps "m dm obj"
+	local.master aliascache m1l2b_radio1 sound/mechanics/shortwave2.wav soundparms 0.7 0.0 1.0 0.0 100 900 auto streamed maps "m dm moh obj"
+	local.master aliascache m1l2b_radio2 sound/mechanics/static1.wav soundparms 0.5 0.0 1.0 0.0 70 700 auto streamed maps "m dm moh obj train"
+	
+	// Remove AI
+	removeclass actor
+	
+	
+	// Make use of some things lying around
+	$truckclip notsolid
+	$tankclip notsolid
+	$truck01 setcollisionentity $opelmap
+	$truck01 thread selfstuff
+	$tank01 thread setup_tank empty_tiger
+	$tank02 thread setup_tank empty_tiger
+	$tank03 thread setup_tank empty_panzer_desert
+	$tank04 thread setup_tank empty_turretless_tiger
+	
+	// relocate the Truck for cover
+	$truck01.origin = ( -1056 2136 -224 ) 
+	$truck01.angle = 40
+
+	//relocate the Jeep for cover
+	$jeep.origin = ( -2540.83 2297.01 -255.88 ) 
+	$jeep.angle = 40
+
+	$tank02 thread drive_pathtank $tank02_path 152 $tank02_drive_trigger	
+	
+	$radio1 loopsound m1l2b_radio1				
+	$radio2 loopsound m1l2b_radio2
+
+	// Unlock some doors
+	$door01 unlock
+	$door02 unlock
+
+	// Remove some things not needed
+	$cutwire01 remove						
+	$cutwire02 remove
+	$cutwire03 remove
+	$spotlight remove
+	$exploder remove
+	$bomb01 remove
+	$bomb02 remove
+	$bomb03 remove
+	$bomb04 remove
+	$bomb05 remove
+	//$munitionscache remove
+	$explosion05_damage remove
+	$exploder remove
+
+	level.springfield = 1								
+	level.bar = 1								
+	level.bazooka = 1	
+	level.mp44 = 1		
+	level.shotgun = 1
+
+
+end
+
+
+// Vehicle thread
+selfstuff:
+	
+	self loopsound opeltruck_snd_idle
+	self anim idlenolights
+	self notsolid
+	self nodamage
+end
+
+
+
+
+
+setup_tank local.tanktype:
+	if (self.target)
+		self.collisionent = self.target
+
+	switch (local.tanktype)
+	{
+	case empty_panzer_desert:
+		self.type = "empty_panzer_desert"
+		break
+	case empty_tiger:
+		self.type = "empty_tiger"
+		break
+	case empty_turretless_tiger:
+		self.type = "empty_turretless_tiger"
+		spawn models/vehicles/tigercannon.tik "targetname" "t4gun" "origin" "1580.61 -1344.80 -70" "angle" "71"	
+		$t4gun scale 1.1
+		$tank04.gun = $tank04 QueryTurretSlotEntity 0
+		$tank04.gun hide
+		break
+	}
+	
+	self nodamage
+end
+
+// Tanks drive bit
+drive_pathtank local.path local.speed local.trigger:
+	
+	local.trigger waittill trigger
+	wait 45 // timed event :P
+	self drive local.path local.speed 5 200 256
+	self waittill drive
+	self stop
+	$tank02.gun = $tank02 QueryTurretSlotEntity 0
+	$tank02.gun setaimtarget $jeep
+end
+
+
+// End some labels
+tank01_bombed:
+end
+tank02_bombed:
+end
+tank03_bombed:
+end
+tank04_bombed:
+end
+crateguy3_thread:
+end
+jeepsequence:
+end
+wrenchguy2_thread:
+end
+wrenchguy1_thread:
+end
+wrenchguy3_thread:
+end
+crateguy2_thread:
+end
+crateguy1_thread:
+end
+room1:
+end
+chase:
+end
+opentruck01_disabled:
+end
+opentruck02_disabled:
+end
+munitionscache_bombed:
+end
+opentruck03_disabled:
+end
+incomplete:
+end
+activate_smoker_sequence:
+end
+gatecrash:
+end
+endlevel:
+end
+grillosay:
+end
+
+
+
+// Cobs was ere :P

@@ -1,0 +1,317 @@
+// Training
+// 
+//
+
+
+main: 
+
+	if((getcvar("g_gametype") == "1")) 
+	{
+	waitthread ffatype
+	end
+	}
+	else
+	{
+	waitthread tdmtype  
+	end
+	}
+end
+
+
+
+tdmtype:
+
+	setcvar "g_obj_alliedtext1" "Map Name: Training"
+	setcvar "g_obj_alliedtext2" ""
+	setcvar "g_obj_alliedtext3" "" 
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/bootcamp.tga" 
+
+	setcvar "g_gametype" "2"
+	
+	removeclass actor
+	removeclass ammoentity
+	$ammo_grenade remove
+	
+	waitthread tdm_spawns
+	
+	level waittill prespawn
+
+	exec global/bomber.scr
+
+	exec global/door_locked.scr
+	thread global/barrel.scr::explosive_barrel
+	exec global/ambient.scr training
+
+	level waittill spawn
+
+	level.clockside = kills
+
+	waitthread setupthestuff
+		
+
+end
+
+
+
+
+ffatype:
+
+	setcvar "g_obj_alliedtext1" "Map Name: Training"
+	setcvar "g_obj_alliedtext2" ""
+	setcvar "g_obj_alliedtext3" "" 
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/bootcamp.tga" 
+
+	setcvar "g_gametype" "1"
+
+	removeclass actor
+	removeclass ammoentity
+
+	$thompson remove
+	$sniper remove
+	$ammo_grenade remove
+
+	waitthread ffa_spawns
+	
+	level waittill prespawn
+
+	exec global/bomber.scr
+
+	exec global/door_locked.scr
+	thread global/barrel.scr::explosive_barrel
+	exec global/ambient.scr training
+
+	level waittill spawn
+
+	level.clockside = kills
+
+	waitthread setupthestuff
+end
+
+
+
+
+tdm_spawns:
+
+	spawn info_player_axis "origin" "6176.88 -2807.13 -387.88" "angle" "177"
+	spawn info_player_axis "origin" "6175.71 -2543.13 -387.88" "angle" "-166"
+	spawn info_player_axis "origin" "5916.66 -2899.55 -387.88" "angle" "154"
+	spawn info_player_axis "origin" "5900.03 -2750.60 -387.88" "angle" "173"
+	spawn info_player_axis "origin" "5906.22 -2585.95 -387.88" "angle" "-159"
+
+	spawn info_player_axis "origin" "5808.66 -2548.01 -387.88" "angle" "-147"
+	spawn info_player_axis "origin" "5612.47 -2926.89 -387.88" "angle" "105"
+	spawn info_player_axis "origin" "5472.87 -2960.87 -387.88" "angle" "147"
+	spawn info_player_axis "origin" "5442.80 -2828.09 -387.88" "angle" "165"
+	spawn info_player_axis "origin" "5459.93 -2632.87 -387.88" "angle" "-173"
+
+	spawn info_player_axis "origin" "5472.45 -2543.13 -387.88" "angle" "-165"
+	spawn info_player_axis "origin" "5282.49 -2555.75 -387.88" "angle" "-171"
+	spawn info_player_axis "origin" "5238.59 -2675.36 -387.88" "angle" "-178"
+	spawn info_player_axis "origin" "5169.44 -2812.53 -387.88" "angle" "165"
+	spawn info_player_axis "origin" "5092.23 -2960.87 -387.88" "angle" "136"
+
+
+	spawn info_player_allied "origin" "-4740.31 304.76 -309.88" "angle" "-14"
+	spawn info_player_allied "origin" "-4657.36 58.78 -319.88" "angle" "-4"
+	spawn info_player_allied "origin" "-4673.31 -288.71 -318.09" "angle" "11"
+	spawn info_player_allied "origin" "-4734.18 -439.13 -309.88" "angle" "9"
+	spawn info_player_allied "origin" "-4455.72 -550.42 -309.88" "angle" "20"
+
+	spawn info_player_allied "origin" "-4273.87 -552.49 -309.88" "angle" "25"
+	spawn info_player_allied "origin" "-4084.70 -485.25 -309.88" "angle" "24"
+	spawn info_player_allied "origin" "-4144.48 -277.22 -319.88" "angle" "9"
+	spawn info_player_allied "origin" "-4164.11 -83.13 -319.88" "angle" "3"
+	spawn info_player_allied "origin" "-4158.67 96.58 -319.88" "angle" "-6"
+
+	spawn info_player_allied "origin" "-4077.03 294.06 -309.88" "angle" "-19"
+	spawn info_player_allied "origin" "-3847.13 271.35 -309.88" "angle" "-24"
+	spawn info_player_allied "origin" "-3760.71 -6.38 -319.88" "angle" "-2"
+	spawn info_player_allied "origin" "-3631.52 -160.25 -319.88" "angle" "13"
+	spawn info_player_allied "origin" "-3643.93 -281.06 -317.41" "angle" "19"
+	
+							
+	
+	
+	
+	//level.rifle = 1
+	level.springfield = 1	
+	level.panzer = 1 
+	level.bar = 1								
+	level.bazooka = 1	
+	level.mp44 = 1		
+	level.shotgun = 1
+	
+end
+
+
+ffa_spawns:
+
+	spawn info_player_deathmatch "origin" "-400.40 -2220.54 -387.88" "angle" "-84"
+	spawn info_player_deathmatch "origin" "56.31 -3335.53 -387.88" "angle" "79"
+	spawn info_player_deathmatch "origin" "-856.13 -2480.74 -395.00" "angle" "-22"
+	spawn info_player_deathmatch "origin" "-1499.01 -1075.70 -299.57" "angle" "-83"
+	spawn info_player_deathmatch "origin" "-1866.75 -855.50 -309.88" "angle" "-42"
+
+	spawn info_player_deathmatch "origin" "-3084.96 -273.49 -295.34" "angle" "21"
+	spawn info_player_deathmatch "origin" "-3564.36 248.88 -302.03" "angle" "-159"
+	spawn info_player_deathmatch "origin" "-4702.44 1184.86 -299.72" "angle" "-122"
+	spawn info_player_deathmatch "origin" "-5600.21 1198.95 -299.88" "angle" "-103"
+	spawn info_player_deathmatch "origin" "-5500.21 -799.65 -309.88" "angle" "73"
+
+	spawn info_player_deathmatch "origin" "-4699.00 -743.73 -309.88" "angle" "118"
+	spawn info_player_deathmatch "origin" "-4334.69 1066.20 64.13" "angle" "-102"
+	spawn info_player_deathmatch "origin" "-4272.78 -1116.62 64.13" "angle" "111"
+	spawn info_player_deathmatch "origin" "-5988.76 -1165.88 64.13" "angle" "60"
+	spawn info_player_deathmatch "origin" "-5998.87 1097.07 64.13" "angle" "-64"
+
+
+	spawn info_player_deathmatch "origin" "6175.15 -2960.87 -387.88" "angle" "153"
+	spawn info_player_deathmatch "origin" "5472.87 -2960.87 -387.88" "angle" "109"
+	spawn info_player_deathmatch "origin" "4815.14 -2559.25 -387.88" "angle" "-46"
+	spawn info_player_deathmatch "origin" "4738.69 -2543.13 -387.88" "angle" "-151"
+	spawn info_player_deathmatch "origin" "4119.29 -2960.87 -387.88" "angle" "35"
+
+	spawn info_player_deathmatch "origin" "3740.07 -2960.87 -387.88" "angle" "105"
+	spawn info_player_deathmatch "origin" "3356.58 -2934.33 -387.88" "angle" "93"
+	spawn info_player_deathmatch "origin" "2604.97 -2929.46 -387.88" "angle" "104"
+	spawn info_player_deathmatch "origin" "2008.81 -2553.95 -387.88" "angle" "-14"
+	spawn info_player_deathmatch "origin" "1676.67 -2519.53 -387.88" "angle" "-165"
+
+	spawn info_player_deathmatch "origin" "794.97 -3720.88 -377.56" "angle" "172"
+	spawn info_player_deathmatch "origin" "670.62 -3589.19 -387.88" "angle" "130"
+	spawn info_player_deathmatch "origin" "925.81 -1983.13 -387.88" "angle" "-117"
+	spawn info_player_deathmatch "origin" "837.49 -1944.87 -387.88" "angle" "170"
+	spawn info_player_deathmatch "origin" "416.87 -2278.18 -387.88" "angle" "-103"
+
+	
+	//level.rifle = 1
+	level.springfield = 1	
+	level.panzer = 1 
+	level.bar = 1								
+	level.bazooka = 1	
+	level.mp44 = 1		
+	level.shotgun = 1
+	
+
+end
+
+
+setupthestuff:
+
+	// Stop em getting infinite nades
+	spawn script_object "targetname" "blocker1" 
+	$blocker1.origin = ( 6097.70 -2933.82 -387.88 )
+	$blocker1 setsize ( -60 -37 -20 ) ( 60 37 77 )
+	$blocker1 solid
+	$blocker1 nodamage
+	
+	$grenade_trigger nottriggerable
+	$obj6b nottriggerable
+	$explosive_on remove
+	$explosive_off remove
+	$explosive remove
+	$explosives_trigger nottriggerable
+	$thompson remove
+	$sniper remove
+	$ammo_grenade remove
+	thread Map_Guard
+	$clip_2 remove
+	$door_2 unlock
+	$door_3 unlock
+	$door_4a unlock
+	$door_5a unlock
+	$door_6a unlock
+	$door_7a unlock
+	$door_8a unlock
+	$exit_door unlock
+	$mg42 maxYawOffset 45
+	$mg42 pitchCaps ( -15 15 0)
+	
+	wait 15
+	thread global/bomber.scr::bomb 4
+	wait 30
+	thread global/bomber.scr::bomb 5
+	wait 45
+	thread global/bomber.scr::bomb 1 1
+	wait 45
+	thread global/bomber.scr::bomb 2 1
+	wait 45
+	thread global/bomber.scr::bomb 3 1
+	wait 45
+	thread global/bomber.scr::bomb 7 1
+	wait 45
+	thread global/bomber.scr::bomb 6
+end	
+
+
+
+Map_Guard:
+
+	spawn trigger_multipleall "targetname" "Killah"
+	$Killah.origin = ( -2659.29 2.23 -450.96 ) 
+	$Killah setsize ( -9999 -9999 -500 ) ( 9999 9999 3 )
+	$Killah setthread noudont
+	
+end
+
+noudont:
+	self waittill trigger
+	local.punk = parm.other
+
+	if!(isalive local.punk)
+	{
+	end
+	}
+	local.punk respawn
+end	
+	
+
+// End Some Labels
+obj2:
+end
+obj3:
+end
+obj6:
+end
+obj6b:
+end
+obj1b:
+end
+tower:
+end
+theplane:
+end
+easter_egg:
+end
+tank_sound:
+end
+pistol:
+end
+smg:
+end
+rifle:
+end
+grenade:
+end
+mg42:
+end
+grenade_target:
+end
+ammo_spawners local.type:
+end
+seencheck:
+end
+
+
+
+// Cobs

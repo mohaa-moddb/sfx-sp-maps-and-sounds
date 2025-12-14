@@ -1,0 +1,390 @@
+state file changes for sound fix:
+
+
+state PUTAWAY_MAIN
+{
+//	movetype legs
+
+	entrycommands
+	{
+		zoomoff
+		viewmodelanim putaway
+	}
+
+	states
+	{
+		// don't go through the putaway anim if 
+		// we're switching to another weapon
+		// only do if g_immediateswitch is set
+		PUTAWAY_SKIPANIM	: IMMEDIATE_SWITCH NEW_WEAPON
+		PUTAWAY_STG44		: IS_WEAPON_ACTIVE "mainhand" "StG 44"
+		PUTAWAY_BAR		: IS_WEAPON_ACTIVE "mainhand" "BAR"
+		PUTAWAY_PISTOL		: IS_WEAPONCLASS_ACTIVE "mainhand" "pistol"
+		PUTAWAY_RIFLE		: IS_WEAPONCLASS_ACTIVE "mainhand" "rifle"
+		PUTAWAY_GRENADE		: IS_WEAPONCLASS_ACTIVE "mainhand" "grenade"
+		PUTAWAY_SMG			: IS_WEAPONCLASS_ACTIVE "mainhand" "smg"
+
+//		PUTAWAY_PISTOL		: IS_WEAPONCLASS_ACTIVE "mainhand" "item" // hold all items like a pistol for now
+		PUTAWAY_SHOTGUN			: IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+		PUTAWAY_BAZOOKA			: IS_WEAPON_ACTIVE "mainhand" "Bazooka"
+		PUTAWAY_PANZERSCHRECK		: IS_WEAPON_ACTIVE "mainhand" "Panzerschreck"
+
+		// Catchall at the end		
+//		PUTAWAY_RIFLE		: default
+		PUTAWAY_NOANIM		: default
+	}
+}
+
+state PUTAWAY_STG44
+{
+//	movetype legs
+
+
+	entrycommands
+	{
+	exec soundfix/mp44sound.scr "putaway"
+	}
+
+	
+	action
+	{
+		mp44_crouch_lower	: IS_WEAPON_ACTIVE "mainhand" "StG 44" POSITION_TYPE "crouching"
+		mp44_stand_lower	: IS_WEAPON_ACTIVE "mainhand" "StG 44"
+
+		mg_crouch_lower		: POSITION_TYPE "crouching"
+		mg_stand_lower		: default
+
+
+	}
+	legs
+	{
+		mp44_stand_idle		: IS_WEAPON_ACTIVE "mainhand" "StG 44" ON_LADDER
+	
+		mg_stand_idle		: ON_LADDER
+	}
+	
+	states
+	{
+		STAND	 			: KILLED
+		
+		GET_ON_LADDER		: ANIMDONE_TORSO ON_LADDER
+		STAND	 			: ANIMDONE_TORSO
+	}
+}
+
+state PUTAWAY_BAR
+{
+//	movetype legs
+
+	entrycommands
+	{
+	exec soundfix/barsound.scr "putaway"
+	}
+	
+	action
+	{
+		mp44_crouch_lower	: IS_WEAPON_ACTIVE "mainhand" "StG 44" POSITION_TYPE "crouching"
+		mp44_stand_lower	: IS_WEAPON_ACTIVE "mainhand" "StG 44"
+
+		mg_crouch_lower		: POSITION_TYPE "crouching"
+		mg_stand_lower		: default
+	}
+	legs
+	{
+		mp44_stand_idle		: IS_WEAPON_ACTIVE "mainhand" "StG 44" ON_LADDER
+	
+		mg_stand_idle		: ON_LADDER
+	}
+	
+	states
+	{
+		STAND	 			: KILLED
+		
+		GET_ON_LADDER		: ANIMDONE_TORSO ON_LADDER
+		STAND	 			: ANIMDONE_TORSO
+	}
+}
+
+state PUTAWAY_SHOTGUN
+{
+//	movetype legs
+
+	entrycommands
+	{
+	exec soundfix/shotgunsound.scr "putaway"
+	}
+	
+	action
+	{
+//		shotgun_crouch_lower	: POSITION_TYPE "crouching" IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+//		shotgun_stand_lower		: IS_NEW_WEAPON "mainhand" "Shotgun"
+		shotgun_crouch_lower	: POSITION_TYPE "crouching" IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+		shotgun_stand_lower		: IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+		
+		bazooka_crouch_lower	: POSITION_TYPE "crouching"
+		bazooka_stand_lower		: default
+	}
+	legs
+	{
+		shotgun_stand_idle		: ON_LADDER IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+		
+		bazooka_stand_idle		: ON_LADDER
+	}
+	
+	states
+	{
+		STAND	 				: KILLED
+		
+		GET_ON_LADDER			: ANIMDONE_TORSO ON_LADDER
+		STAND	 				: ANIMDONE_TORSO
+	}
+}
+
+state PUTAWAY_BAZOOKA
+{
+//	movetype legs
+
+	entrycommands
+	{
+	exec soundfix/bazookasound.scr "putaway"
+	}
+	
+	action
+	{
+//		shotgun_crouch_lower	: POSITION_TYPE "crouching" IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+//		shotgun_stand_lower		: IS_NEW_WEAPON "mainhand" "Shotgun"
+		shotgun_crouch_lower	: POSITION_TYPE "crouching" IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+		shotgun_stand_lower		: IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+		
+		bazooka_crouch_lower	: POSITION_TYPE "crouching"
+		bazooka_stand_lower		: default
+	}
+	legs
+	{
+		shotgun_stand_idle		: ON_LADDER IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+		
+		bazooka_stand_idle		: ON_LADDER
+	}
+	
+	states
+	{
+		STAND	 				: KILLED
+		
+		GET_ON_LADDER			: ANIMDONE_TORSO ON_LADDER
+		STAND	 				: ANIMDONE_TORSO
+	}
+}
+
+state PUTAWAY_PANZERSCHRECK
+{
+//	movetype legs
+
+	entrycommands
+	{
+	exec soundfix/panzersound.scr "putaway"
+	}
+	
+	action
+	{
+//		shotgun_crouch_lower	: POSITION_TYPE "crouching" IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+//		shotgun_stand_lower		: IS_NEW_WEAPON "mainhand" "Shotgun"
+		shotgun_crouch_lower	: POSITION_TYPE "crouching" IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+		shotgun_stand_lower		: IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+		
+		bazooka_crouch_lower	: POSITION_TYPE "crouching"
+		bazooka_stand_lower		: default
+	}
+	legs
+	{
+		shotgun_stand_idle		: ON_LADDER IS_WEAPON_ACTIVE "mainhand" "Shotgun"
+		
+		bazooka_stand_idle		: ON_LADDER
+	}
+	
+	states
+	{
+		STAND	 				: KILLED
+		
+		GET_ON_LADDER			: ANIMDONE_TORSO ON_LADDER
+		STAND	 				: ANIMDONE_TORSO
+	}
+}
+
+state RAISE_WEAPON
+{
+	movetype legs
+
+	entrycommands
+	{
+		viewmodelanim pullout
+
+		// just to make sure nothing funky's 
+		// attached that shouldn't be.
+		correctweaponattachments
+	}
+
+	states
+	{
+		RAISE_PISTOL		: IS_NEW_WEAPONCLASS "mainhand" "pistol"
+		RAISE_RIFLE			: IS_NEW_WEAPONCLASS "mainhand" "rifle"
+		RAISE_GRENADE		: IS_NEW_WEAPONCLASS "mainhand" "grenade"
+		RAISE_SMG			: IS_NEW_WEAPONCLASS "mainhand" "smg"
+		RAISE_MP44			: IS_NEW_WEAPON "mainhand" "StG 44"
+		RAISE_BAR			: IS_NEW_WEAPON "mainhand" "BAR"
+//		RAISE_PISTOL		: IS_NEW_WEAPONCLASS "mainhand" "item" // hold all items like a pistol for now
+		RAISE_SHOTGUN			: IS_NEW_WEAPON "mainhand" "Shotgun"
+		RAISE_BAZOOKA			: IS_NEW_WEAPON "mainhand" "Bazooka"
+		RAISE_PANZERSCHRECK		: IS_NEW_WEAPON "mainhand" "Panzerschreck"
+		RAISE_PAPERS		: IS_NEW_WEAPON "mainhand" "Papers"
+		
+//		RAISE_RIFLE			: default
+		RAISE_NOANIM		: default
+	}
+}
+
+state RAISE_MP44
+{
+
+	entrycommands
+	{
+	exec soundfix/mp44sound.scr "raise"
+	}
+
+	movetype legs
+	
+	action
+	{
+		
+		mp44_crouch_raise	: IS_NEW_WEAPON "mainhand" "StG 44" POSITION_TYPE "crouching"
+		mp44_stand_raise	: IS_NEW_WEAPON "mainhand" "StG 44"
+		mg_crouch_raise	: POSITION_TYPE "crouching"
+		mg_stand_raise	: default
+	}
+	
+	states
+	{
+		STAND	 			: KILLED
+		
+		STAND	 			: ANIMDONE_TORSO
+		
+		// allow immediate switching to a different weapon instead
+		RAISE_ABORT			: +NEW_WEAPON
+	}
+}
+
+state RAISE_BAR
+{
+
+	entrycommands
+	{
+	exec soundfix/barsound.scr "raise"
+	}
+
+	movetype legs
+	
+	action
+	{
+		
+		mg_crouch_raise	: POSITION_TYPE "crouching"
+		mg_stand_raise	: default
+	}
+	
+	states
+	{
+		STAND	 			: KILLED
+		
+		STAND	 			: ANIMDONE_TORSO
+		
+		// allow immediate switching to a different weapon instead
+		RAISE_ABORT			: +NEW_WEAPON
+	}
+}
+
+state RAISE_SHOTGUN
+{
+
+	entrycommands
+	{
+	exec soundfix/shotgunsound.scr "raise"
+	}
+
+
+	movetype legs
+	
+	action
+	{
+		shotgun_crouch_raise	: POSITION_TYPE "crouching" IS_NEW_WEAPON "mainhand" "Shotgun"
+		shotgun_stand_raise		: IS_NEW_WEAPON "mainhand" "Shotgun"
+		
+	}
+	
+	states
+	{
+		STAND	 			: KILLED
+		
+		STAND	 			: ANIMDONE_TORSO
+		
+		// allow immediate switching to a different weapon instead
+		RAISE_ABORT			: +NEW_WEAPON
+	}
+}
+
+state RAISE_BAZOOKA
+{
+
+	entrycommands
+	{
+	exec soundfix/bazookasound.scr "raise"
+	}
+
+
+	movetype legs
+	
+	action
+	{
+
+		
+		bazooka_crouch_raise	: POSITION_TYPE "crouching"
+		bazooka_stand_raise		: default
+	}
+	
+	states
+	{
+		STAND	 			: KILLED
+		
+		STAND	 			: ANIMDONE_TORSO
+		
+		// allow immediate switching to a different weapon instead
+		RAISE_ABORT			: +NEW_WEAPON
+	}
+}
+
+state RAISE_PANZERSCHRECK
+{
+
+	entrycommands
+	{
+	exec soundfix/panzersound.scr "raise"
+	}
+
+
+	movetype legs
+	
+	action
+	{
+
+		
+		bazooka_crouch_raise	: POSITION_TYPE "crouching"
+		bazooka_stand_raise		: default
+	}
+	
+	states
+	{
+		STAND	 			: KILLED
+		
+		STAND	 			: ANIMDONE_TORSO
+		
+		// allow immediate switching to a different weapon instead
+		RAISE_ABORT			: +NEW_WEAPON
+	}
+}

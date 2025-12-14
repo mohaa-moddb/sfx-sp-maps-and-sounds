@@ -1,0 +1,1145 @@
+//
+// M1L3C - Lighting The Torch
+//
+
+
+main: 
+
+	if((getcvar("g_gametype") == "1")) 
+	{
+	waitthread ffatype
+	end
+	}
+	else
+	{
+	waitthread tdmtype  
+	end
+	}
+end
+
+
+
+tdmtype:
+
+	setcvar "g_obj_alliedtext1"  "Map Name: M1L3C" 
+	setcvar "g_obj_alliedtext2" "Lighting The Torch"
+	setcvar "g_obj_alliedtext3"    "Lighthouse"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing1a.tga" 
+
+	setcvar "g_gametype" "2"
+	
+	waitthread tdm_spawns
+	waitthread set_da_stuff_up
+
+	level waittill prespawn
+
+	thread global/door_locked.scr::lock
+	exec global/ambient.scr m1l3c
+	
+	level waittill spawn
+
+	$world farplane 0
+
+	level.radiosound = spawn script_model model "fx/dummy.tik"
+	level.radiosound.origin = $radio3.origin
+	level.radiosound loopsound m1l2b_radio1
+
+	level.clockside = kills
+
+	wait 5
+
+	local.messagetosay = "S T A G E  1 ... F A C I L I T Y  E X I T"
+	thread scrollMsg local.messagetosay
+
+	
+end
+
+
+
+ffatype:
+
+	setcvar "g_obj_alliedtext1"  "Map Name: M1L3C" 
+	setcvar "g_obj_alliedtext2" "Lighting The Torch"
+	setcvar "g_obj_alliedtext3"    "Lighthouse"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing1a.tga" 
+
+	setcvar "g_gametype" "1"
+	
+	waitthread ffa_spawns
+	waitthread set_da_stuff_up
+	
+	level waittill prespawn
+
+	thread global/door_locked.scr::lock
+	exec global/ambient.scr m1l3c
+	
+	level waittill spawn
+
+	level.clockside = kills
+
+	
+
+end
+
+
+tdm_spawns:
+
+
+	// Stage 1 spawns 
+	spawn info_player_axis "origin" "-6170.06 -1468.13 49.79" "angle" "-116" "targetname" "X1"
+	spawn info_player_axis "origin" "-6112.56 -1626.99 58.83" "angle" "-129" "targetname" "X2"
+	spawn info_player_axis "origin" "-6370.71 -1494.28 63.91" "angle" "-129" "targetname" "X3"
+	spawn info_player_axis "origin" "-6501.72 -1600.73 73.77" "angle" "-94" "targetname" "X4"
+	spawn info_player_axis "origin" "-6420.11 -1768.92 140.23" "angle" "-86" "targetname" "X5"
+
+	spawn info_player_axis "origin" "-6351.94 -1730.20 138.94" "angle" "-87" "targetname" "X6" 
+	spawn info_player_axis "origin" "-6413.14 -1671.01 142.69" "angle" "-95" "targetname" "X7"
+	spawn info_player_axis "origin" "-6346.88 -1663.77 140.70" "angle" "-94" "targetname" "X8"
+	spawn info_player_axis "origin" "-6394.69 -2028.11 65.45" "angle" "-83" "targetname" "X9"
+	spawn info_player_axis "origin" "-6315.17 -2120.28 44.40" "angle" "-81" "targetname" "X10"
+
+	spawn info_player_axis "origin" "-6540.08 -2143.74 66.85" "angle" "-66" "targetname" "X11"
+	spawn info_player_axis "origin" "-6566.79 -2307.59 45.64" "angle" "-36" "targetname" "X12"
+	spawn info_player_axis "origin" "-6433.21 -2383.20 19.22" "angle" "-35" "targetname" "X13"
+	spawn info_player_axis "origin" "-6280.29 -2224.35 25.11" "angle" "-84" "targetname" "X14"
+	spawn info_player_axis "origin" "-6575.85 -2222.79 59.22" "angle" "-49" "targetname" "X15"
+
+
+
+	spawn info_player_allied "origin" "-4789.12 -5823.97 752.13" "angle" "159" "targetname" "A1"
+	spawn info_player_allied "origin" "-4835.01 -5970.43 752.13" "angle" "132" "targetname" "A2"
+	spawn info_player_allied "origin" "-5713.04 -5801.57 752.13" "angle" "93" "targetname" "A3"
+	spawn info_player_allied "origin" "-5547.13 -5895.18 752.13" "angle" "121" "targetname" "A4"
+	spawn info_player_allied "origin" "-5426.51 -5403.21 716.13" "angle" "-106" "targetname" "A5" 
+
+	spawn info_player_allied "origin" "-5663.13 -5455.13 728.13" "angle" "-172" "targetname" "A6"
+	spawn info_player_allied "origin" "-5471.13 -5584.88 240.13" "angle" "113" "targetname" "A7"
+	spawn info_player_allied "origin" "-5471.13 -5491.13 240.13" "angle" "135" "targetname" "A8"
+	spawn info_player_allied "origin" "-5695.13 -5532.88 240.13" "angle" "75" "targetname" "A9"
+	spawn info_player_allied "origin" "-5821.13 -5584.88 240.13" "angle" "68" "targetname" "A10"
+
+	spawn info_player_allied "origin" "-5474.95 -5341.77 244.13" "angle" "59" "targetname" "A11"
+	spawn info_player_allied "origin" "-562.98 343.19 -23.88" "angle" "84" "targetname" "A12"
+	spawn info_player_allied "origin" "-5577.03 -5340.89 244.13" "angle" "100" "targetname" "A13"
+	spawn info_player_allied "origin" "-5669.90 -5263.61 240.13" "angle" "74" "targetname" "A14"
+	spawn info_player_allied "origin" "-5783.74 -5255.94 240.13" "angle" "50" "targetname" "A15"
+	 
+
+	// Stage 2 spawns 
+	spawn info_player_axis "origin" "-6223.84 -1740.20 67.81" "angle" "26" "targetname" "XX1"
+	spawn info_player_axis "origin" "-6520.81 -1796.81 77.93" "angle" "28" "targetname" "XX2"
+	spawn info_player_axis "origin" "-6548.71 -1710.21 78.72" "angle" "10" "targetname" "XX3"
+	spawn info_player_axis "origin" "-6162.22 -1360.79 45.47" "angle" "-12" "targetname" "XX4"
+	spawn info_player_axis "origin" "-5919.39 -1377.98 55.94" "angle" "-12" "targetname" "XX5"
+
+	spawn info_player_axis "origin" "-5909.81 -1656.88 60.85" "angle" "-7" "targetname" "XX6" 
+	spawn info_player_axis "origin" "-4921.19 -1567.58 158.54" "angle" "-12" "targetname" "XX7"
+	spawn info_player_axis "origin" "-5013.03 -1816.74 136.52" "angle" "-11" "targetname" "XX8"
+	spawn info_player_axis "origin" "-4728.38 -1568.20 160.84" "angle" "0" "targetname" "XX9"
+	spawn info_player_axis "origin" "-4667.63 -1604.30 157.51" "angle" "-9" "targetname" "XX10"
+
+	spawn info_player_axis "origin" "-4113.18 -2417.47 144.15" "angle" "-3" "targetname" "XX11"
+	spawn info_player_axis "origin" "-3673.80 -2433.39 134.21" "angle" "0" "targetname" "XX12"
+	spawn info_player_axis "origin" "-3523.99 -2733.19 128.13" "angle" "11" "targetname" "XX13"
+	spawn info_player_axis "origin" "-5015.89 -1732.28 141.04" "angle" "-14" "targetname" "XX14"
+	spawn info_player_axis "origin" "-5166.54 -1659.33 118.43" "angle" "-21" "targetname" "XX15"
+
+
+	
+	spawn info_player_allied "origin" "519.51 -2027.59 1104.13" "angle" "-165" "targetname" "AA1"
+	spawn info_player_allied "origin" "599.40 -1888.11 1104.13" "angle" "-142" "targetname" "AA2"
+	spawn info_player_allied "origin" "579.33 -1743.97 1104.13" "angle" "116" "targetname" "AA3"
+	spawn info_player_allied "origin" "409.97 -1570.90 1104.13" "angle" "174" "targetname" "AA4"
+	spawn info_player_allied "origin" "206.35 -1749.74 1116.13" "angle" "-61" "targetname" "AA5" 
+
+	spawn info_player_allied "origin" "375.29 -1909.62 324.13" "angle" "-163" "targetname" "AA6"
+	spawn info_player_allied "origin" "316.88 -2056.87 324.13" "angle" "160" "targetname" "AA7"
+	spawn info_player_allied "origin" "160.30 -1682.51 324.13" "angle" "-110" "targetname" "AA8"
+	spawn info_player_allied "origin" "95.13 -1857.80 324.13" "angle" "-84" "targetname" "AA9"
+	spawn info_player_allied "origin" "-16.87 -1940.19 324.13" "angle" "-62" "targetname" "AA10"
+
+	spawn info_player_allied "origin" "216.87 -2234.93 324.13" "angle" "-149" "targetname" "AA11"
+	spawn info_player_allied "origin" "297.45 -1886.84 1116.13" "angle" "159" "targetname" "AA12"
+	spawn info_player_allied "origin" "474.83 -1891.40 324.13" "angle" "-151" "targetname" "AA13"
+	spawn info_player_allied "origin" "544.87 -1796.57 324.13" "angle" "-134" "targetname" "AA14"
+	spawn info_player_allied "origin" "463.54 -1673.40 324.13" "angle" "173" "targetname" "AA15"
+
+	$XX1 disablespawn
+	$XX2 disablespawn
+	$XX3 disablespawn
+	$XX4 disablespawn
+	$XX5 disablespawn
+	$XX6 disablespawn
+	$XX7 disablespawn
+	$XX8 disablespawn
+	$XX9 disablespawn
+	$XX10 disablespawn
+	$XX11 disablespawn
+	$XX12 disablespawn
+	$XX13 disablespawn
+	$XX14 disablespawn
+	$XX15 disablespawn
+
+	$AA1 disablespawn
+	$AA2 disablespawn
+	$AA3 disablespawn
+	$AA4 disablespawn
+	$AA5 disablespawn
+	$AA6 disablespawn
+	$AA7 disablespawn
+	$AA8 disablespawn
+	$AA9 disablespawn
+	$AA10 disablespawn
+	$AA11 disablespawn
+	$AA12 disablespawn
+	$AA13 disablespawn
+	$AA14 disablespawn
+	$AA15 disablespawn
+
+	thread Cue_Stage_2
+
+	// Blocker for dodgy spawn over sea 
+	spawn script_object "targetname" "saved_from_death"
+	$saved_from_death.origin = ( -643.44 391.41 -300.88 )  
+	$saved_from_death setsize ( -150 -150 -150 ) ( 150 150 2500 )
+	$saved_from_death solid
+	$saved_from_death nodamage
+	
+end
+
+
+Cue_Stage_2:
+
+	wait 300
+
+	$X1 disablespawn
+	$X2 disablespawn
+	$X3 disablespawn
+	$X4 disablespawn
+	$X5 disablespawn
+	$X6 disablespawn
+	$X7 disablespawn
+	$X8 disablespawn
+	$X9 disablespawn
+	$X10 disablespawn
+	$X11 disablespawn
+	$X12 disablespawn
+	$X13 disablespawn
+	$X14 disablespawn
+	$X15 disablespawn
+
+	$A1 disablespawn
+	$A2 disablespawn
+	$A3 disablespawn
+	$A4 disablespawn
+	$A5 disablespawn
+	$A6 disablespawn
+	$A7 disablespawn
+	$A8 disablespawn
+	$A9 disablespawn
+	$A10 disablespawn
+	$A11 disablespawn
+	$A12 disablespawn
+	$A13 disablespawn
+	$A14 disablespawn
+	$A15 disablespawn
+
+	$XX1 enablespawn
+	$XX2 enablespawn
+	$XX3 enablespawn
+	$XX4 enablespawn
+	$XX5 enablespawn
+	$XX6 enablespawn
+	$XX7 enablespawn
+	$XX8 enablespawn
+	$XX9 enablespawn
+	$XX10 enablespawn
+	$XX11 enablespawn
+	$XX12 enablespawn
+	$XX13 enablespawn
+	$XX14 enablespawn
+	$XX15 enablespawn
+
+	$AA1 enablespawn
+	$AA2 enablespawn
+	$AA3 enablespawn
+	$AA4 enablespawn
+	$AA5 enablespawn
+	$AA6 enablespawn
+	$AA7 enablespawn
+	$AA8 enablespawn
+	$AA9 enablespawn
+	$AA10 enablespawn
+	$AA11 enablespawn
+	$AA12 enablespawn
+	$AA13 enablespawn
+	$AA14 enablespawn
+	$AA15 enablespawn
+
+	$radmobile.origin = ( -4595.35 -1778.64 199.55 ) //( -6289.20 -1616.31 100 )
+	$radmobile.angles = ( -3.67 -15.22 0.00 ) //( 5.54 40 -2.00 )
+	
+
+	$ossmobile.origin = ( -6442.86 -1907.63 98.93 ) // ( -6454.42 -2001.39 118.72 ) 
+	$ossmobile.angles = ( -15.30 60.88 5.00 ) //( -1.90 79.20 0.00 )
+
+	$saved_from_death nottriggerable
+	thread s2_lifesaver
+	$interior remove
+
+	$player respawn
+ 
+	wait 5
+
+	local.messagetosay = "S T A G E  2 ... L I G H T H O U S E  A S S A U L T"
+	thread scrollMsg local.messagetosay
+
+	wait 25
+
+	// Initiate the Trucks for cover
+	thread truckydrive
+	
+
+
+end
+
+
+
+ffa_spawns: 
+
+	spawn info_player_deathmatch "origin" "420.89 -1590.92 1104.13" "angle" "176"
+	spawn info_player_deathmatch "origin" "412.87 -1953.09 324.13" "angle" "177"
+	spawn info_player_deathmatch "origin" "-438.21 -1455.13 298.91" "angle" "-112"
+	spawn info_player_deathmatch "origin" "-1723.22 -2228.91 320.13" "angle" "-154"
+	spawn info_player_deathmatch "origin" "-3683.00 -2429.97 134.25" "angle" "-7"
+
+	spawn info_player_deathmatch "origin" "-6238.12 -1814.64 66.38" "angle" "-129"
+	spawn info_player_deathmatch "origin" "-5998.33 -4345.87 35.13" "angle" "-25"
+	spawn info_player_deathmatch "origin" "-5159.51 -5475.13 -23.88" "angle" "-155"
+	spawn info_player_deathmatch "origin" "-5808.88 -4199.13 240.13" "angle" "-84"
+	spawn info_player_deathmatch "origin" "-5520.00 -5584.87 240.13" "angle" "84"
+
+	spawn info_player_deathmatch "origin" "-5558.31 -6064.87 752.13" "angle" "105"
+	spawn info_player_deathmatch "origin" "-4892.13 -5055.13 716.13" "angle" "126"
+	spawn info_player_deathmatch "origin" "-5755.87 -4958.56 716.13" "angle" "-1"
+	spawn info_player_deathmatch "origin" "-5232.04 -4756.87 716.13" "angle" "136"
+	spawn info_player_deathmatch "origin" "-4634.03 -6516.03 884.13" "angle" "87"
+
+end
+
+
+
+set_da_stuff_up:
+	
+	// Some sounds
+	local.master = spawn scriptmaster
+	local.master aliascache electrical_hum2 sound/null.wav soundparms 0.25 0.0 1.2 0.0 100 2000 auto loaded maps "m dm moh obj train"
+	local.master aliascache m1l2b_radio1 sound/mechanics/shortwave2.wav soundparms 0.7 0.0 1.0 0.0 100 900 auto streamed maps "m dm moh obj"
+	local.master aliascache lighthouse_run sound/mechanics/M1_LightTurn.wav soundparms 1.2 0.0 1.0 0.0 500 5000 item loaded maps "m1l3c dm moh obj train"
+	local.master aliascache machine_loop sound/amb/Amb_MachineLoop_05.wav soundparms 1.0 0.0 1.0 0.0 100 1000 auto loaded maps "m1l3c m2l1"
+	
+	
+	
+	// Remove AI
+	removeclass actor
+	$exploderfire remove
+	$explodersmashed remove
+	thread prep
+
+	
+
+	// Relocate the Trucks 
+	$radmobile.origin = ( -6388.66 -1810.48 66.61 ) 
+	$radmobile.angles = ( 1.54 -93.71 -2.00 )
+
+	$ossmobile.origin = ( -6397.22 -2518.83 11.36 ) 
+	$ossmobile.angles = ( 7.08 -17.14 -3.00 )
+
+	$radmobile notsolid
+	$ossmobile notsolid
+
+	// Set the Trucks collision
+	$radmobile setcollisionentity $opelcollision
+	$ossmobile setcollisionentity $opelcollision
+	$opelcollision notsolid
+
+	// Turn the lights off until needed
+	 $ossmobile anim idlenolights
+	 $radmobile anim idlenolights
+	
+	// Keep them alive until Stage 2
+	$radmobile nodamage 
+	$ossmobile nodamage
+	
+	$fence_busted remove
+	$the_end remove
+	$enddialog remove
+	
+	level.radiosound = spawn script_model model "fx/dummy.tik"
+	level.radiosound.origin = $radio3.origin
+	level.radiosound loopsound m1l2b_radio1	
+
+	$world farplane 0
+	
+	$beam bind $lamp
+	$switchnopulse hide
+	$beam show
+	$lamp rotatey 15
+	$lamp loopsound lighthouse_run
+	thread spray1
+	thread spray2
+	thread spray3
+	thread spray4
+	thread spray5
+	thread spray6
+	$lighthum1 playsound electrical_hum2
+	$lighthum2 playsound electrical_hum2
+	$lighthum3 playsound electrical_hum2
+	$lighthum4 playsound electrical_hum2
+	$lighthum5 playsound electrical_hum2
+	$lighthum6 playsound electrical_hum2
+	$lighthum7 playsound electrical_hum2
+
+	level.springfield = 1								
+	level.bar = 1								
+	level.bazooka = 1	
+	level.mp44 = 1		
+	level.shotgun = 1
+
+end	
+
+
+truckydrive:
+
+
+	$t58.origin = "-4144 -2048 348"
+
+	$radmobile anim idlelights
+	exec global/spotlight.scr::corona $radmobile "light left" 
+	exec global/spotlight.scr::corona $radmobile "light right"
+
+	// drive Vector position, speed, acceleration, reach_distance, look_ahead
+	$radmobile drive $t58 110 50 100 256
+	$radmobile waittill drive
+	$radmobile stop
+
+	// Make it Destroyable
+	$radmobile takedamage
+	$radmobile thread global/vehicles_thinkers.scr::enemy_truck_think 1500
+
+	wait 75
+
+	// Relocate the Trucks path end so the 2nd Truck doesnt hit the back of the first one :P
+	$t63.origin = "-1808 -2520 404"
+	$t64.origin = "-1770 -2504 388"
+	$t65.origin = "-1658 -2505 404"
+	$t71.origin = "-1562 -2472 396"
+
+
+
+	$ossmobile anim idlelights
+	exec global/spotlight.scr::corona $ossmobile "light left" 
+	exec global/spotlight.scr::corona $ossmobile "light right"
+	$ossmobile takedamage
+	$ossmobile thread global/vehicles_thinkers.scr::enemy_truck_think 2500
+	$ossmobile drive $weez_juice 110 50 100 256
+	$ossmobile waittill drive
+	$ossmobile stop
+end
+
+
+
+scrollMsg local.messagetosay:
+
+	huddraw_align 223 left center
+	huddraw_font 223 facfont-20
+	huddraw_alpha 223 1
+
+	huddraw_color 223 1 1 1
+
+	huddraw_rect 223 20 150 200 40
+	huddraw_string 223 local.messagetosay
+
+	for(local.i=1;local.i<=local.messagetosay.size;local.i++)
+	{
+	local.x = ""
+	for(local.z=1;local.z<=(local.messagetosay.size - local.i);local.z++)
+	{
+	local.x = (local.x + " ")
+	}
+	local.tmpstring4 = ""
+	for (local.o=0;local.o<local.i;local.o++) local.tmpstring4 = local.tmpstring4 + local.messagetosay[local.o]
+	huddraw_string 223 (local.x + local.tmpstring4)
+	wait .03
+	}
+	wait 3
+	for (local.o=1;local.o>0;local.o=local.o - 0.01)
+	{
+	huddraw_alpha 223 local.o
+	wait 0.05
+	}
+	huddraw_alpha 223 0 
+end
+
+
+
+spray1:
+
+	wait 13
+
+	trigger $spray1
+
+goto spray1
+
+spray2:
+
+	wait 3.5
+
+	$spray1 anim start
+
+	wait 1
+
+	$spray2 anim stop
+
+goto spray2
+
+spray3:
+
+	wait 6
+
+	$spray3 anim start
+
+	wait 1
+
+	$spray3 anim stop
+
+goto spray3
+
+spray4:
+
+	wait 2.5
+
+	$spray4 anim start
+
+	wait 1
+
+	$spray4 anim stop
+
+goto spray4
+
+spray5:
+
+	wait 5
+
+	$spray5 anim start
+
+	wait 1
+
+	$spray5 anim stop
+
+goto spray5
+
+spray6:
+
+	wait 3
+
+	$spray5 anim start
+
+	wait 1
+
+	$spray5 anim stop
+
+goto spray6
+
+end
+
+
+
+
+	
+bunker_door_locked:
+
+	$bunker_door_locked playsound door_metal_locked 
+
+end
+
+
+waterdeath:
+
+	$ocean volumedamage 1000
+
+end
+
+
+
+prep:
+
+// use EagleEye's code - save me a job :P
+level.lift = spawn trigger_use "targetname" "liftdown"
+level.lift.origin = ( -5948 -5522 778 )
+level.lift setsize ( -10 -10 -10 ) ( 10 10 10 )
+
+level.lift = spawn trigger_use "targetname" "liftup"
+level.lift.origin = ( -5952 -5437 784 )
+level.lift setsize ( -10 -10 -10 ) ( 10 10 10 )
+
+local.button = spawn script_model targetname elevator_pulse2
+local.button model "animate/electrical_switch_pulse.tik"
+local.button.origin = ( -5952 -5437 784 )
+local.button.angles = ( 0 90 0 )
+local.button.scale = 1
+local.button solid
+
+local.button = spawn script_model targetname elevator_switch2
+local.button model "animate/electrical_switch_nopulse.tik"
+local.button.origin = ( -5952 -5437 784 )
+local.button.angles = ( 0 90 0 )
+local.button.scale = 1
+local.button solid
+
+
+local.button = spawn script_model targetname callliftpulse1
+local.button model "animate/electrical_switch_pulse.tik"
+local.button.origin = ( -5836 -5594 778 )
+local.button.angles = ( 0 -90 0 )
+local.button.scale = 1
+local.button solid
+
+local.button = spawn script_model targetname calllift1
+local.button model "animate/electrical_switch_nopulse.tik"
+local.button.origin = ( -5836 -5594 778 )
+local.button.angles = ( 0 -90 0 )
+local.button.scale = 1
+local.button solid
+
+$calllift1 hide
+
+level.lift = spawn trigger_use "targetname" "calllift1_trig"
+level.lift.origin = ( -5836 -5594 778 )
+level.lift setsize ( -10 -10 -10 ) ( 10 10 10 )
+
+
+local.button = spawn script_model targetname callliftpulse2
+local.button model "animate/electrical_switch_pulse.tik"
+local.button.origin = ( -5848 -5582 295 )
+local.button.angles = ( 0 -90 0 )
+local.button.scale = 1
+local.button solid
+
+local.button = spawn script_model targetname calllift2
+local.button model "animate/electrical_switch_nopulse.tik"
+local.button.origin = ( -5848 -5582 295 )
+local.button.angles = ( 0 -90 0 )
+local.button.scale = 1
+local.button solid
+
+$calllift2 hide
+
+level.lift = spawn trigger_use "targetname" "calllift2_trig"
+level.lift.origin = ( -5848 -5582 295 )
+level.lift setsize ( -10 -10 -10 ) ( 10 10 10 )
+
+
+local.button = spawn script_model targetname callliftpulse3
+local.button model "animate/electrical_switch_pulse.tik"
+local.button.origin = ( -5854 -5604 27 )
+local.button.angles = ( 0 180 0 )
+local.button.scale = 1
+local.button solid
+
+local.button = spawn script_model targetname calllift3
+local.button model "animate/electrical_switch_nopulse.tik"
+local.button.origin = ( -5854 -5604 27 )
+local.button.angles = ( 0 180 0 )
+local.button.scale = 1
+local.button solid
+
+$calllift3 hide
+
+level.lift = spawn trigger_use "targetname" "calllift3_trig"
+level.lift.origin = ( -5854 -5604 27 )
+level.lift setsize ( -10 -10 -10 ) ( 10 10 10 )
+
+level.liftfloor = 1
+level.liftinuse = 0
+
+$elevator_switch_pulse bind $elevator_cab
+$elevator_switch bind $elevator_cab
+$elevator_switch anim off
+$liftdown bind $elevator_switch
+
+$elevator_switch2 bind $elevator_cab
+$elevator_pulse2 bind $elevator_cab
+$elevator_switch2 anim off
+$elevator_pulse2 hide
+$liftup bind $elevator_switch2
+
+//*** Elevator Speeds
+$elevator_cab time 4
+$elevator_gate_1 time 0.75
+$elevator_gate_2 time 0.75
+$elevator_gate_3 time 0.75
+
+//*** Elevator Clips
+$clip1 hide
+//$clip1 notsolid
+$clip2 hide
+$clip2 notsolid
+$clip3 hide
+$clip3 notsolid
+
+$elevator_cab playsound elevator_start wait
+wait .5
+$elevator_cab playsound elevator_run
+$elevator_cab moveto $elevator_way1
+$elevator_cab waitmove
+$elevator_cab playsound elevator_stop
+wait 1
+$elevator_gate_1 playsound elevator_gate
+$elevator_gate_1 movedown 70
+$elevator_gate_1 waitmove
+$clip1 notsolid
+$elevatoractorclip notsolid
+
+thread downtrig
+thread uptrig
+thread calllift1
+thread calllift2
+thread calllift3
+
+end
+
+calllift1:
+
+$calllift1_trig waittill trigger
+
+local.player = parm.other
+
+if(level.liftinuse == 1)
+{
+local.player iprint "Lift in use"
+thread calllift1
+end
+}
+
+
+if(level.liftfloor == 2)
+{
+level.liftinuse = 1
+thread calllift1
+$calllift1 show
+$callliftpulse1 hide
+$elevator_pulse2 hide
+$elevator_switch2 show
+$calllift1 anim turn
+$calllift1 anim waittill animdone
+$calllift1 anim on
+$elevator_gate_2 playsound elevator_gate
+$elevator_gate_2 moveup 70
+$elevator_gate_2 waitmove
+waitthread moveone
+$elevator_gate_1 playsound elevator_gate
+$elevator_gate_1 movedown 70
+$elevator_gate_1 waitmove
+$calllift1 anim off
+$calllift1 hide
+$callliftpulse1 show
+wait 2
+level.liftinuse = 0
+end
+}
+
+if(level.liftfloor == 3)
+{
+level.liftinuse = 1
+thread calllift1
+$calllift1 show
+$callliftpulse1 hide
+$elevator_pulse2 hide
+$elevator_switch2 show
+$calllift1 anim turn
+$calllift1 anim waittill animdone
+$calllift1 anim on
+$elevator_gate_3 playsound elevator_gate
+$elevator_gate_3 moveup 70
+$elevator_gate_3 waitmove
+waitthread moveone
+$elevator_gate_1 playsound elevator_gate
+$elevator_gate_1 movedown 70
+$elevator_gate_1 waitmove
+$calllift1 anim off
+$calllift1 hide
+$callliftpulse1 show
+$elevator_switch_pulse show
+wait 2
+level.liftinuse = 0
+end
+}
+
+else 
+{
+thread calllift1
+}
+
+end
+
+calllift2:
+
+$calllift2_trig waittill trigger
+
+local.player = parm.other
+
+if(level.liftinuse == 1)
+{
+local.player iprint "Lift in use"
+thread calllift2
+end
+}
+
+
+if(level.liftfloor == 1)
+{
+level.liftinuse = 1
+thread calllift2
+$calllift2 show
+$callliftpulse2 hide
+$elevator_pulse2 show
+$elevator_pulse show
+$calllift2 anim turn
+$calllift2 anim waittill animdone
+$calllift2 anim on
+$elevator_gate_1 playsound elevator_gate
+$elevator_gate_1 moveup 70
+$elevator_gate_1 waitmove
+waitthread movetwo
+$elevator_gate_2 playsound elevator_gate
+$elevator_gate_2 movedown 70
+$elevator_gate_2 waitmove
+$calllift2 anim off
+$calllift2 hide
+$callliftpulse2 show
+
+wait 2
+level.liftinuse = 0
+end
+}
+
+if(level.liftfloor == 3)
+{
+level.liftinuse = 1
+thread calllift2
+$calllift2 show
+$callliftpulse2 hide
+$calllift2 anim turn
+$calllift2 anim waittill animdone
+$calllift2 anim on
+$elevator_gate_3 playsound elevator_gate
+$elevator_gate_3 moveup 70
+$elevator_gate_3 waitmove
+waitthread movetwo
+$elevator_gate_2 playsound elevator_gate
+$elevator_gate_2 movedown 70
+$elevator_gate_2 waitmove
+$calllift2 anim off
+$calllift2 hide
+$callliftpulse2 show
+$elevator_switch_pulse show
+wait 2
+level.liftinuse = 0
+end
+}
+else 
+{
+thread calllift2
+}
+
+end
+
+calllift3:
+
+$calllift3_trig waittill trigger
+
+local.player = parm.other
+
+if(level.liftinuse == 1)
+{
+local.player iprint "Lift in use"
+thread calllift3
+end
+}
+
+
+if(level.liftfloor == 1)
+{
+level.liftinuse = 1
+thread calllift3
+$calllift3 show
+$callliftpulse3 hide
+$calllift3 anim turn
+$calllift3 anim waittill animdone
+$calllift3 anim on
+$elevator_gate_1 playsound elevator_gate
+$elevator_gate_1 moveup 70
+$elevator_gate_1 waitmove
+waitthread movetwo
+$elevator_gate_3 playsound elevator_gate
+$elevator_gate_3 movedown 70
+$elevator_gate_3 waitmove
+$calllift3 anim off
+$calllift3 hide
+$callliftpulse3 show
+$elevator_switch_pulse hide
+$elevator_pulse2 show
+wait 2
+level.liftinuse = 0
+end
+}
+
+if(level.liftfloor == 2)
+{
+level.liftinuse = 1
+thread calllift3
+$elevator_switch show
+$elevator_switch_pulse hide
+$calllift3 show
+$callliftpulse3 hide
+$calllift3 anim turn
+$calllift3 anim waittill animdone
+$calllift3 anim on
+$elevator_gate_2 playsound elevator_gate
+$elevator_gate_2 moveup 70
+$elevator_gate_2 waitmove
+waitthread movethree
+$elevator_gate_3 playsound elevator_gate
+$elevator_gate_3 movedown 70
+$elevator_gate_3 waitmove
+$calllift3 anim off
+$calllift3 hide
+$callliftpulse3 show
+wait 2
+level.liftinuse = 0
+end
+}
+else 
+{
+thread calllift3
+}
+
+end
+
+
+downtrig:
+
+$liftdown waittill trigger
+
+local.player = parm.other
+
+if(level.liftinuse == 1)
+{
+local.player iprint "Lift in use"
+thread downtrig
+end
+}
+
+
+if(level.liftfloor == 1)
+{
+level.liftinuse = 1
+thread downtrig
+$elevator_switch show
+$elevator_switch_pulse hide
+$elevator_switch anim turn
+$elevator_switch anim waittill animdone
+$elevator_switch anim on
+$elevator_gate_1 playsound elevator_gate
+$elevator_gate_1 moveup 70
+$elevator_gate_1 waitmove
+waitthread movetwo
+$elevator_gate_2 playsound elevator_gate
+$elevator_gate_2 movedown 70
+$elevator_gate_2 waitmove
+$elevator_switch anim off
+$elevator_switch hide
+$elevator_switch_pulse show
+$elevator_pulse2 show
+wait 2
+level.liftinuse = 0
+end
+}
+
+if(level.liftfloor == 2)
+{
+level.liftinuse = 1
+thread downtrig
+$elevator_switch show
+$elevator_switch_pulse hide
+$elevator_switch anim turn
+$elevator_switch anim waittill animdone
+$elevator_switch anim on
+$elevator_gate_2 playsound elevator_gate
+$elevator_gate_2 moveup 70
+$elevator_gate_2 waitmove
+waitthread movethree
+$elevator_gate_3 playsound elevator_gate
+$elevator_gate_3 movedown 70
+$elevator_gate_3 waitmove
+$elevator_switch anim off
+wait 2
+level.liftinuse = 0
+end
+}
+else 
+{
+thread downtrig
+}
+end
+
+uptrig:
+
+$liftup waittill trigger
+
+local.player = parm.other
+
+if(level.liftinuse == 1)
+{
+local.player iprint "Lift in use"
+thread uptrig
+end
+}
+
+if(level.liftfloor == 2)
+{
+level.liftinuse = 1
+thread uptrig
+$elevator_switch2 show
+$elevator_pulse2 hide
+$elevator_switch2 anim turn
+$elevator_switch2 anim waittill animdone
+$elevator_switch2 anim on
+$elevator_gate_2 playsound elevator_gate
+$elevator_gate_2 moveup 70
+$elevator_gate_2 waitmove
+waitthread moveone
+$elevator_gate_1 playsound elevator_gate
+$elevator_gate_1 movedown 70
+$elevator_gate_1 waitmove
+$elevator_switch2 anim off
+wait 2
+level.liftinuse = 0
+end
+}
+
+if(level.liftfloor == 3)
+{
+level.liftinuse = 1
+thread uptrig
+$elevator_switch2 show
+$elevator_pulse2 hide
+$elevator_switch2 anim turn
+$elevator_switch2 anim waittill animdone
+$elevator_switch2 anim on
+$elevator_gate_3 playsound elevator_gate
+$elevator_gate_3 moveup 70
+$elevator_gate_3 waitmove
+waitthread movetwo
+$elevator_gate_2 playsound elevator_gate
+$elevator_gate_2 movedown 70
+$elevator_gate_2 waitmove
+$elevator_switch2 hide
+$elevator_pulse2 show
+$elevator_switch_pulse show
+$elevator_switch2 anim off
+wait 2
+level.liftinuse = 0
+end
+}
+else 
+{
+thread uptrig
+}
+end
+
+moveone:
+
+
+$clip1 solid
+wait 1
+$elevator_cab playsound elevator_start wait
+wait .5
+$elevator_cab playsound elevator_run
+$elevator_cab moveto $elevator_way1
+$elevator_cab waitmove
+wait 1
+level.liftfloor = 1
+$clip1 notsolid
+
+
+
+
+end
+
+movetwo:
+
+
+$clip1 solid
+wait 1
+$elevator_cab playsound elevator_start wait
+wait .5
+$elevator_cab playsound elevator_run
+$elevator_cab moveto $elevator_way2
+$elevator_cab waitmove
+wait 1
+level.liftfloor = 2
+$clip1 notsolid
+
+
+end
+
+movethree:
+
+$clip2 solid
+wait 1
+$elevator_cab playsound elevator_start wait
+wait .5
+$elevator_cab playsound elevator_run
+$elevator_cab moveto $elevator_way3
+$elevator_cab waitmove
+wait 1
+level.liftfloor = 3
+$clip2 notsolid
+end
+
+
+// End some labels
+bathroom_door:
+end
+radio3:
+end
+radio2:
+end
+radio1:
+end
+radio4:
+end
+bust_gate:
+end
+germantalkers:
+end
+missionfailed:
+end
+grillo_dialog:
+end
+binocs:
+end
+elevator_failsafe:
+end

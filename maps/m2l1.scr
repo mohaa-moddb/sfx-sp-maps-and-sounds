@@ -1,0 +1,259 @@
+//
+// M2L1 - Secret Documents of the Kriegsmarine
+//
+
+
+main: 
+
+	if((getcvar("g_gametype") == "1")) 
+	{
+	waitthread ffatype
+	end
+	}
+	else
+	{
+	waitthread tdmtype  
+	end
+	}
+end
+
+
+
+tdmtype:
+
+	setcvar "g_obj_alliedtext1"  "Map Name: M2L1" 
+	setcvar "g_obj_alliedtext2" "Secret Documents of "
+	setcvar "g_obj_alliedtext3"  " the Kriegsmarine"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing2a.tga" 
+
+	setcvar "g_gametype" "2"
+	
+	waitthread tdm_spawns
+	waitthread set_da_stuff_up
+
+	level waittill prespawn
+
+	thread global/door_locked.scr::lock
+	exec global/ambient.scr m2l1
+	
+	level waittill spawn
+
+	level.clockside = kills
+
+	
+end
+
+
+
+ffatype:
+
+	setcvar "g_obj_alliedtext1"  "Map Name: M2L1" 
+	setcvar "g_obj_alliedtext2" "Secret Documents of "
+	setcvar "g_obj_alliedtext3"  " the Kriegsmarine"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing2a.tga" 
+
+	
+	setcvar "g_gametype" "1"
+	
+	waitthread ffa_spawns
+	waitthread set_da_stuff_up
+	
+	level waittill prespawn
+
+	thread global/door_locked.scr::lock
+	exec global/ambient.scr m2l1
+	
+	level waittill spawn
+
+	level.clockside = kills
+
+	
+
+end
+
+
+tdm_spawns:
+
+
+
+	// 
+	spawn info_player_axis "origin" "944.45 2385.03 624.13" "angle" "-86" "targetname" "X1"
+	spawn info_player_axis "origin" "765.40 2350.61 624.13" "angle" "-96" "targetname" "X2"
+	spawn info_player_axis "origin" "575.13 2374.71 624.13" "angle" "-68" "targetname" "X3"
+	spawn info_player_axis "origin" "796.37 2548.91 448.13" "angle" "14" "targetname" "X4"
+	spawn info_player_axis "origin" "791.13 2676.48 448.13" "angle" "3" "targetname" "X5"
+
+	spawn info_player_axis "origin" "1264.87 2605.44 448.13" "angle" "160" "targetname" "X6" 
+	spawn info_player_axis "origin" "1424.88 2447.13 448.13" "angle" "98" "targetname" "X7"
+	spawn info_player_axis "origin" "1768.57 2115.37 448.13" "angle" "121" "targetname" "X8"
+	spawn info_player_axis "origin" "1937.80 2251.59 448.13" "angle" "142" "targetname" "X9"
+	spawn info_player_axis "origin" "2106.38 2326.16 448.13" "angle" "158" "targetname" "X10"
+
+	spawn info_player_axis "origin" "2218.13 2137.92 448.13" "angle" "148" "targetname" "X11"
+	spawn info_player_axis "origin" "2563.74 2220.75 448.13" "angle" "161" "targetname" "X12"
+	spawn info_player_axis "origin" "1696.55 2767.52 499.36" "angle" "-135" "targetname" "X13"
+	spawn info_player_axis "origin" "1893.32 2715.71 491.19" "angle" "-155" "targetname" "X14"
+	spawn info_player_axis "origin" "576.07 3328.87 448.13" "angle" "-69" "targetname" "X15"
+
+
+
+	spawn info_player_allied "origin" "392.50 -3776.87 488.12" "angle" "46" "targetname" "A1"
+	spawn info_player_allied "origin" "1900.07 -3721.16 536.39" "angle" "112" "targetname" "A2"
+	spawn info_player_allied "origin" "1989.64 -3120.86 478.63" "angle" "141" "targetname" "A3"
+	spawn info_player_allied "origin" "-323.81 -3776.87 488.13" "angle" "128" "targetname" "A4"
+	spawn info_player_allied "origin" "-1425.31 -3772.59 472.58" "angle" "44" "targetname" "A5" 
+
+	spawn info_player_allied "origin" "-1520.86 -3753.95 584.13" "angle" "61" "targetname" "A6"
+	spawn info_player_allied "origin" "-1801.17 -3760.86 584.13" "angle" "9" "targetname" "A7"
+	spawn info_player_allied "origin" "-2132.56 -3378.35 484.00" "angle" "33" "targetname" "A8"
+	spawn info_player_allied "origin" "-2062.78 -3148.61 484.00" "angle" "8" "targetname" "A9"
+	spawn info_player_allied "origin" "-1972.37 -3065.31 484.00" "angle" "58" "targetname" "A10"
+
+	spawn info_player_allied "origin" "-1750.48 -3085.53 484.00" "angle" "87" "targetname" "A11"
+	spawn info_player_allied "origin" "-1314.70 -2969.85 487.08" "angle" "0" "targetname" "A12"
+	spawn info_player_allied "origin" "-1704.20 -3392.42 484.13" "angle" "23" "targetname" "A13"
+	spawn info_player_allied "origin" "-2241.29 -2957.43 486.41" "angle" "-27" "targetname" "A14"
+	spawn info_player_allied "origin" "-2387.16 -3133.96 481.26" "angle" "-2" "targetname" "A15"
+	 
+
+	
+
+end
+
+
+
+
+ffa_spawns: 
+
+
+	spawn info_player_deathmatch "origin" "-1814.51 -2672.87 776.13" "angle" "58"
+	spawn info_player_deathmatch "origin" "431.13 -3641.05 489.66" "angle" "75"
+	spawn info_player_deathmatch "origin" "-1623.08 -1170.81 452.94" "angle" "3"
+	spawn info_player_deathmatch "origin" "-2132.54 447.73 464.39" "angle" "-2"
+	spawn info_player_deathmatch "origin" "-1619.10 1552.47 488.40" "angle" "11"
+
+	spawn info_player_deathmatch "origin" "307.13 2400.87 624.13" "angle" "-87"
+	spawn info_player_deathmatch "origin" "1008.87 2400.87 624.13" "angle" "-122"
+	spawn info_player_deathmatch "origin" "820.88 1519.13 624.13" "angle" "159"
+	spawn info_player_deathmatch "origin" "1315.79 1687.46 448.13" "angle" "-177"
+	spawn info_player_deathmatch "origin" "891.24 1963.57 448.13" "angle" "99"
+
+	spawn info_player_deathmatch "origin" "872.87 3252.87 448.13" "angle" "-113"
+	spawn info_player_deathmatch "origin" "807.13 2613.46 448.13" "angle" "26"
+	spawn info_player_deathmatch "origin" "1490.65 1656.19 502.26" "angle" "72"
+	spawn info_player_deathmatch "origin" "3688.93 2288.74 503.85" "angle" "173"
+	spawn info_player_deathmatch "origin" "3564.65 1390.24 484.13" "angle" "174"
+
+end
+
+
+
+set_da_stuff_up:
+	
+	// Some sounds
+	local.master = spawn scriptmaster
+	local.master aliascache m2l1_radio1 sound/mechanics/shortwave2.wav soundparms 0.7 0.0 1.0 0.0 100 900 auto streamed maps "m dm moh obj"
+	local.master aliascache radio_loop sound/mechanics/Mec_RadioMusic_01.wav soundparms 0.5 0.0 1.0 0.0 150 800 local streamed maps "m2l1 m6l2a dm moh obj train"
+	local.master aliascache m2l1_radio3 sound/mechanics/Mec_RadioLoop_05.wav soundparms 0.7 0.0 1.0 0.0 100 500 auto loaded maps "m2 dm moh obj train"
+
+
+	// Remove AI
+	removeclass actor
+
+	$gate_clip remove
+	$main_gate remove
+
+	$radio1_sound loopsound m2l1_radio1
+	$radio2_sound loopsound radio_loop
+	$radio3_sound loopsound m2l1_radio1
+
+	//thread Map_Guard
+
+	level.rifle = 1								
+	level.bar = 1								
+	level.bazooka = 1	
+	level.mp44 = 1		
+	level.shotgun = 1
+
+	
+end	
+
+
+// not needed
+Map_Guard:
+
+	level.killcount = 0
+
+	spawn trigger_multipleall "targetname" "Killah"
+	$Killah.origin = ( 3152.01 3558.89 590.76 ) 
+	$Killah setsize ( -30 -130 -200 ) ( 30 30 200 )
+	$Killah setthread die
+	$Killah message "Play fair!"
+end
+
+die:
+	iprintln "*** - Map_Guard Triggered - ***"
+	local.punk = parm.other
+	if!(isalive local.punk)
+	{
+	end
+	}
+	local.punk thread spawn_fx models/animate/fx_mortar_dirt.tik 
+	local.punk kill
+	wait 1
+	if (local.punk.health == 0)
+	{
+	level.killcount ++
+	waitthread hudprint ("Map Guard Kills:" + level.killcount ) .75 .65 .1
+	}
+end
+
+
+hudprint local.nstring local.r local.g local.b:
+
+	huddraw_rect 187 140 -84 50 50 
+	huddraw_color 187 local.r local.g local.b 
+	huddraw_font 187 "facfont-20" 
+	huddraw_string 187 local.nstring 
+	huddraw_align 187 left bottom 
+	huddraw_alpha 187 1 
+end 
+
+spawn_fx local.fx:
+	local.temp = spawn script_model model local.fx
+	local.temp notsolid
+	local.temp.origin = self.origin
+	local.temp anim start
+	wait 3
+	local.temp remove
+end
+
+
+
+// End some labels
+document2:
+end
+document1:
+end
+s7_test:
+end
+music2:
+end
+document4:
+end
+document3:
+end
+ladder_hint:
+end
+enable_hall_guards:
+end

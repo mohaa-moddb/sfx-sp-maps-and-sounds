@@ -1,0 +1,277 @@
+//
+// M4L3 - The Command Post
+
+//
+// 
+// 
+
+
+main: 
+
+	if((getcvar("g_gametype") == "1")) 
+	{
+	waitthread ffatype
+	end
+	}
+	else
+	{
+	waitthread tdmtype  
+	end
+	}
+end
+
+
+
+tdmtype:
+
+	setcvar "g_obj_alliedtext1"   "Map Name: M4L2" 
+	setcvar "g_obj_alliedtext2"    ""
+	setcvar "g_obj_alliedtext3"  "The Command Post"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing4a.tga" 
+
+	setcvar "g_gametype" "2"
+
+	waitthread tdm_spawns
+	
+	level waittill prespawn
+
+	exec global/ambient.scr m4l3
+	exec global/door_locked.scr
+
+	level waittill spawn
+
+	waitthread furniture
+
+	level.clockside = kills
+
+end
+
+
+
+
+ffatype:
+
+	setcvar "g_obj_alliedtext1"   "Map Name: M4L2" 
+	setcvar "g_obj_alliedtext2"    ""
+	setcvar "g_obj_alliedtext3"  "The Command Post"
+
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing4a.tga" 
+	
+	setcvar "g_gametype" "1"
+	
+	waitthread ffa_spawns
+	
+	level waittill prespawn
+
+	thread global/door_locked.scr::lock
+	exec global/ambient.scr m4l3
+	
+	level waittill spawn
+
+	waitthread furniture
+
+	level.clockside = kills
+
+end
+
+
+tdm_spawns:
+
+ 
+	removeclass actor
+
+	spawn info_player_axis "origin" "-146.39 3020.08 1.41" "angle" "-133" "targetname" "X1"
+	spawn info_player_axis "origin" "226.52 2913.17 2.12" "angle" "-157" "targetname" "X2"
+	spawn info_player_axis "origin" "655.46 2498.43 2.12" "angle" "-135" "targetname" "X3"
+	spawn info_player_axis "origin" "882.02 2241.95 2.12" "angle" "-126" "targetname" "X4"
+	spawn info_player_axis "origin" "1335.13 1888.87 2.31" "angle" "-158" "targetname" "X5"
+
+	spawn info_player_axis "origin" "1326.52 145.89 -41.49" "angle" "-138" "targetname" "X6" 
+	spawn info_player_axis "origin" "1236.93 -6.90 -25.66" "angle" "168" "targetname" "X7"
+	spawn info_player_axis "origin" "581.87 -1124.80 -63.88" "angle" "16" "targetname" "X8"
+	spawn info_player_axis "origin" "459.93 -1079.57 -61.51" "angle" "144" "targetname" "X9"
+	spawn info_player_axis "origin" "233.21 -1105.92 -61.93" "angle" "132" "targetname" "X10"
+
+	spawn info_player_axis "origin" "-88.68 -1114.17 -39.27" "angle" "95" "targetname" "X11"
+	spawn info_player_axis "origin" "81.34 -771.21 -45.76" "angle" "110" "targetname" "X12"
+	spawn info_player_axis "origin" "-2716.02 512.83 -191.88" "angle" "-97" "targetname" "X13"
+	spawn info_player_axis "origin" "-2855.88 -384.87 216.13" "angle" "51" "targetname" "X14"
+	spawn info_player_axis "origin" "-1800.87 -1416.33 408.13" "angle" "65" "targetname" "X15"
+	
+
+	spawn info_player_allied "origin" "-5295.78 -943.72 -22.75" "angle" "78" "targetname" "A1"
+	spawn info_player_allied "origin" "-4794.08 -622.29 -114.45" "angle" "106" "targetname" "A2"
+	spawn info_player_allied "origin" "-4583.83 -745.05 -78.87" "angle" "94" "targetname" "A3"
+	spawn info_player_allied "origin" "-4753.47 -463.24 -84.52" "angle" "93" "targetname" "A4"
+	spawn info_player_allied "origin" "-5232.09 -408.18 -66.49" "angle" "79" "targetname" "A5" 
+
+	spawn info_player_allied "origin" "-5706.83 -312.39 3.48" "angle" "62" "targetname" "A6"
+	spawn info_player_allied "origin" "-6244.29 -407.69 15.59" "angle" "48" "targetname" "A7"
+	spawn info_player_allied "origin" "-6276.89 153.91 -1.82" "angle" "8" "targetname" "A8"
+	spawn info_player_allied "origin" "-6360.87 -576.78 24.34" "angle" "52" "targetname" "A9"
+	spawn info_player_allied "origin" "-5022.05 -538.97 -112.64" "angle" "95" "targetname" "A10"
+
+	spawn info_player_allied "origin" "-5014.18 -673.86 -116.61" "angle" "98" "targetname" "A11"
+	spawn info_player_allied "origin" "-4882.85 -229.81 -87.22" "angle" "103" "targetname" "A12"
+	spawn info_player_allied "origin" "-5054.08 -1333.86 -109.10" "angle" "91" "targetname" "A13"
+	spawn info_player_allied "origin" "-4831.38 -1453.18 -135.88" "angle" "95" "targetname" "A14"
+	spawn info_player_allied "origin" "-4375.92 -1461.12 -82.27" "angle" "109" "targetname" "A15"
+
+	local.master = spawn scriptmaster
+	local.master aliascache fire_med sound/amb/fire.wav soundparms 1.2 0.0 1.0 0.0 160 1600 auto loaded maps "m dm moh obj train"
+	
+
+	
+	level.springfield = 1								
+	level.bar = 1								
+	level.bazooka = 1
+	level.panzer = 1 
+	level.mp44 = 1		
+	//level.shotgun = 1
+	level.rifle = 1
+
+end
+
+
+ffa_spawns: 
+
+	removeclass actor
+
+	spawn info_player_deathmatch "origin" "-6014.92 2399.34 -14.87" "angle" "-41"
+	spawn info_player_deathmatch "origin" "-4328.24 2792.88 2.13" "angle" "-114"
+	spawn info_player_deathmatch "origin" "-4000.33 356.49 -25.03" "angle" "41"
+	spawn info_player_deathmatch "origin" "-2619.44 -530.64 -4.22" "angle" "54"
+	spawn info_player_deathmatch "origin" "-3104.87 688.87 16.13" "angle" "-41"
+
+	spawn info_player_deathmatch "origin" "-2720.88 -2656.87 13.38" "angle" "60"
+	spawn info_player_deathmatch "origin" "-1335.13 -1075.13 0.13" "angle" "-128"
+	spawn info_player_deathmatch "origin" "-1816.87 -1544.88 200.13" "angle" "61"
+	spawn info_player_deathmatch "origin" "-2230.32 2791.58 2.12" "angle" "-142"
+	spawn info_player_deathmatch "origin" "999.22 2013.49 2.12" "angle" "-135"
+
+	spawn info_player_deathmatch "origin" "1222.76 1.29 -29.03" "angle" "-161"
+	spawn info_player_deathmatch "origin" "480.68 -1621.87 -59.45" "angle" "75"
+	spawn info_player_deathmatch "origin" "-399.13 -1640.87 0.12" "angle" "124"
+	spawn info_player_deathmatch "origin" "-1128.87 -368.87 0.12" "angle" "38"
+	spawn info_player_deathmatch "origin" "-1724.87 87.13 -15.88" "angle" "74"
+
+	local.master = spawn scriptmaster
+	local.master aliascache fire_med sound/amb/fire.wav soundparms 1.2 0.0 1.0 0.0 160 1600 auto loaded maps "m dm moh obj train"
+	
+	
+
+	level.springfield = 1								
+	level.bar = 1								
+	level.bazooka = 1
+	level.panzer = 1 
+	level.mp44 = 1		
+	//level.shotgun = 1
+	level.rifle = 1
+
+end
+
+
+// Re-arrange some things for better gameplay :)
+furniture:
+
+	
+	$spotlight remove
+
+	$tank1_bomb remove
+	$tank2_bomb remove
+
+	$tank1_bomb_trigger nottriggerable
+	$tank2_bomb_trigger nottriggerable
+
+	$faketruck_model remove
+	$faketruck_collision remove
+	
+	$realtruck vehicleanim idlelights
+	$realtruck.corona = 1
+
+	$realtruck setcollisionentity $opeltruck_start_exit_collisionmask
+	$realtruck.origin = ( -4761.52 1608.91 41.76 )
+	$realtruck.angle = -145
+	$realtruck nodamage
+
+	$truckblock remove
+
+	$endgate_left solid
+	$endgate_right solid
+	$truckgate solid
+	$truckgate time 4
+        $truckgate moveeast 360
+        $truckgate waitmove
+	$truckgate disconnect_paths
+	 
+	spawn script_object "targetname" "blocker1" 
+	$blocker1.origin = ( -4826.05 -2323.17 -135.77 )
+	$blocker1 setsize ( -2000 -1 -10 ) ( 2090 1 500 )
+	$blocker1 solid
+	$blocker1 nodamage
+
+
+
+	
+
+end
+
+
+// End some labels
+alarm_player_reset:
+end
+dogsyes:
+end
+ending_spawner1:
+end
+ending_spawner4:
+end
+tank2_bomb_plant:
+end
+end_level:
+end
+manon_shout:
+end
+objective5_add:
+end
+objective1_complete:
+end
+objective2_complete:
+end
+objective5_complete:
+end
+objective3_complete:
+end
+objective4_complete:
+end
+faketruck_playerexit:
+end
+intro_truck_unlockview:
+end
+end_truck:
+end
+tank1_bomb_plant:
+end
+tank_bomb_pickup:
+end
+ending_spawner2:
+end
+phone:
+end
+dogsno:
+end
+end_autosave:
+end
+
+
+// Cobs
+

@@ -1,0 +1,28 @@
+main local.command:
+
+	if(level.rifle != 1)
+	{
+	end
+	}
+
+	thread local.command
+
+
+
+end
+
+
+
+reload:
+
+self playsound m1_snd_reload
+waitframe
+self playsound snd_ping
+
+end
+
+shoot:
+
+self playsound m1_snd_fire
+
+end

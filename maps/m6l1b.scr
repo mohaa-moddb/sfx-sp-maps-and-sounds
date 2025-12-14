@@ -1,0 +1,256 @@
+//
+// M6L1B - The Siegfried Forest - Bunker Hill
+
+//  Looks same as m61la to me - EA musta ran out of ideas :P
+// 
+// 
+
+
+
+
+main: 
+
+	if((getcvar("g_gametype") == "1")) 
+	{
+	waitthread ffatype
+	end
+	}
+	else
+	{
+	waitthread tdmtype  
+	end
+	}
+end
+
+
+
+tdmtype:
+
+	setcvar "g_obj_alliedtext1"    "Map Name: M6L1B" 
+	setcvar "g_obj_alliedtext2"  "The Siegfried Forest"
+	setcvar "g_obj_alliedtext3"      "Bunker Hill"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing6a.tga" 
+
+	setcvar "g_gametype" "2"
+
+	waitthread tdm_spawns
+
+	level waittill prespawn
+
+	exec global/ambient.scr m6l1b
+	
+	level waittill spawn
+
+	waitthread remove_stuff
+
+	thread Map_Guard
+
+	level.clockside = kills
+
+end
+
+	
+
+ffatype:
+
+	
+	setcvar "g_obj_alliedtext1"    "Map Name: M6L1B" 
+	setcvar "g_obj_alliedtext2"  "The Siegfried Forest"
+	setcvar "g_obj_alliedtext3"      "Bunker Hill"
+
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing6a.tga" 
+	
+	setcvar "g_gametype" "1"
+	
+	waitthread ffa_spawns
+
+	
+	level waittill prespawn
+
+	exec global/ambient.scr m6l1b
+	
+	level waittill spawn
+
+	waitthread remove_stuff
+
+	thread Map_Guard
+
+	level.clockside = kills
+
+end
+
+
+tdm_spawns:
+
+ 
+	removeclass actor
+	removeclass ammoentity
+
+
+	spawn info_player_axis "origin" "-783.69 -4157.85 1687.47" "angle" "93" "targetname" "X1"
+	spawn info_player_axis "origin" "-550.27 -4260.86 1659.33" "angle" "96" "targetname" "X2"
+	spawn info_player_axis "origin" "-320.09 -3962.54 1668.60" "angle" "110" "targetname" "X3"
+	spawn info_player_axis "origin" "-379.54 -3605.94 1694.18" "angle" "120" "targetname" "X4"
+	spawn info_player_axis "origin" "-244.52 -3464.36 1717.19" "angle" "100" "targetname" "X5"
+
+	spawn info_player_axis "origin" "16.48 -3562.99 1730.60" "angle" "90" "targetname" "X6" 
+	spawn info_player_axis "origin" "240.52 -3216.68 1767.19" "angle" "120" "targetname" "X7"
+	spawn info_player_axis "origin" "104.10 -2925.10 1768.13" "angle" "156" "targetname" "X8"
+	spawn info_player_axis "origin" "209.32 -2632.06 1788.35" "angle" "129" "targetname" "X9"
+	spawn info_player_axis "origin" "-208.28 -2805.53 1760.24" "angle" "127" "targetname" "X10"
+
+	spawn info_player_axis "origin" "-396.18 -2849.44 1748.76" "angle" "101" "targetname" "X11"
+	spawn info_player_axis "origin" "-685.84 -3081.00 1716.13" "angle" "116" "targetname" "X12"
+	spawn info_player_axis "origin" "-747.14 -3260.53 1711.48" "angle" "139" "targetname" "X13"
+	spawn info_player_axis "origin" "-1010.41 -3460.69 1741.42" "angle" "88" "targetname" "X14"
+	spawn info_player_axis "origin" "-1148.28 -3651.36 1836.75" "angle" "114" "targetname" "X15"
+	
+
+	spawn info_player_allied "origin" "-808.19 2388.55 2112.13" "angle" "-54" "targetname" "A1"
+	spawn info_player_allied "origin" "-991.48 2047.11 2112.13" "angle" "-79" "targetname" "A2"
+	spawn info_player_allied "origin" "-1164.19 2287.82 2112.13" "angle" "-115" "targetname" "A3"
+	spawn info_player_allied "origin" "-404.14 2206.28 1740.26" "angle" "-96" "targetname" "A4"
+	spawn info_player_allied "origin" "-71.50 1965.24 1716.19" "angle" "-100" "targetname" "A5" 
+
+	spawn info_player_allied "origin" "218.23 1889.94 1716.19" "angle" "-114" "targetname" "A6"
+	spawn info_player_allied "origin" "359.92 1665.10 1716.19" "angle" "-94" "targetname" "A7"
+	spawn info_player_allied "origin" "-2501.28 2063.71 2151.39" "angle" "-93" "targetname" "A8"
+	spawn info_player_allied "origin" "-2233.10 2142.60 2142.01" "angle" "-108" "targetname" "A9"
+	spawn info_player_allied "origin" "-1989.36 1817.68 2157.37" "angle" "-105" "targetname" "A10"
+
+	spawn info_player_allied "origin" "-3008.60 2731.22 1804.34" "angle" "-139" "targetname" "A11"
+	spawn info_player_allied "origin" "-3394.19 3144.18 1807.97" "angle" "-135" "targetname" "A12"
+	spawn info_player_allied "origin" "-3675.12 2835.42 1743.52" "angle" "-131" "targetname" "A13"
+	spawn info_player_allied "origin" "-3557.43 2634.85 1716.13" "angle" "-118" "targetname" "A14"
+	spawn info_player_allied "origin" "-4073.20 2607.91 1699.14" "angle" "-106" "targetname" "A15"
+
+
+
+	
+
+	//level.springfield = 1								
+	level.bar = 1								
+	level.bazooka = 1
+	level.panzer = 1 
+	level.mp44 = 1		
+	level.shotgun = 1
+	level.rifle = 1
+
+
+	
+end
+
+
+
+
+
+ffa_spawns: 
+
+	removeclass actor
+	removeclass ammoentity
+
+
+	spawn info_player_deathmatch "origin" "-1379.71 -6438.61 1704.13" "angle" "108"
+	spawn info_player_deathmatch "origin" "-2570.38 -4511.66 1772.47" "angle" "-13"
+	spawn info_player_deathmatch "origin" "-979.04 -4125.99 1722.20" "angle" "-36"
+	spawn info_player_deathmatch "origin" "-1567.89 -6790.02 1704.06" "angle" "121"
+	spawn info_player_deathmatch "origin" "-3701.53 -6888.88 1741.57" "angle" "82"
+
+	spawn info_player_deathmatch "origin" "-1499.62 -4610.80 1733.86" "angle" "-20"
+	spawn info_player_deathmatch "origin" "-53.42 -4335.58 1684.93" "angle" "-147"
+	spawn info_player_deathmatch "origin" "470.51 -3246.67 1773.36" "angle" "140"
+	spawn info_player_deathmatch "origin" "-1346.82 -3055.11 1772.40" "angle" "107"
+	spawn info_player_deathmatch "origin" "-717.78 -1065.96 1716.13" "angle" "7"
+
+	spawn info_player_deathmatch "origin" "1020.27 288.79 1831.71" "angle" "145"
+	spawn info_player_deathmatch "origin" "-1988.47 2770.51 2408.13" "angle" "-127"
+	spawn info_player_deathmatch "origin" "-4497.05 4632.81 1688.46" "angle" "-52"
+	spawn info_player_deathmatch "origin" "-5808.87 3343.13 1744.13" "angle" "6"
+	spawn info_player_deathmatch "origin" "-5545.69 1335.05 1765.04" "angle" "-4"
+
+	
+	//level.springfield = 1								
+	level.bar = 1								
+	level.bazooka = 1
+	level.panzer = 1 
+	level.mp44 = 1		
+	level.shotgun = 1
+	level.rifle = 1
+
+end
+
+
+remove_stuff:
+	$sb1_mg42 remove
+	$sb2_mg42 remove
+	$20mm_weapon1_explosive remove
+	$mbdust1 remove
+	$mbdust2 remove
+	$mbdust3 remove
+	$mbdust4 remove
+	
+end
+
+
+
+// Under Map Protection - Probably not needed in this map - but just incase
+Map_Guard:
+
+	spawn trigger_multipleall "targetname" "Killah"
+	$Killah.origin = ( -1925.47 -2150.12 1536.13 ) 
+	$Killah setsize ( -9999 -9999 -900 ) ( 9999 9999 2 )
+	$Killah setthread die
+	
+end
+
+die:
+	
+	iprintln "*** - Map_Guard Triggered - ***"
+	local.punk = parm.other
+	if!(isalive local.punk)
+	{
+	end
+	}
+	local.punk thread spawn_fx2 models/animate/explosion_bridge.tik 
+end
+
+spawn_fx2 local.fx:
+	local.temp = spawn script_model model local.fx
+	local.temp.origin = self.origin
+	local.temp.scale = .3
+	local.temp playsound gas_explode1
+	local.temp anim start
+	radiusdamage local.temp 120 120
+	wait 3
+	local.temp remove
+end
+
+
+// End some labels
+explode_controller local.target:
+end
+jitter_large local.time:	
+end
+end_of_level:
+end
+levelbluh:
+end
+20mm_weapon1_set_explosive:
+end
+level_end_trigger:
+end
+
+
+
+
+// Cobs
+

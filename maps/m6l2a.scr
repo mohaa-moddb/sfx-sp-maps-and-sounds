@@ -1,0 +1,331 @@
+//
+// M6L2A - The Communications Blackout
+
+//  
+// 
+// 
+
+
+
+
+main: 
+
+	if((getcvar("g_gametype") == "1")) 
+	{
+	waitthread ffatype
+	end
+	}
+	else
+	{
+	waitthread tdmtype  
+	end
+	}
+end
+
+
+
+tdmtype:
+
+	setcvar "g_obj_alliedtext1"     "Map Name: M6L2A" 
+	setcvar "g_obj_alliedtext2"            "The"
+	setcvar "g_obj_alliedtext3"  "Communications Blackout"
+	
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing6a.tga" 
+
+	setcvar "g_gametype" "2"
+
+	waitthread tdm_spawns
+
+	level waittill prespawn
+
+	exec global/door_locked.scr
+	exec global/ambient.scr m6l2a
+
+	level waittill spawn
+
+	waitthread setup_game
+
+	//thread Map_Guard
+
+
+	level.clockside = kills
+
+end
+
+	
+
+ffatype:
+
+	
+	setcvar "g_obj_alliedtext1"     "Map Name: M6L2A" 
+	setcvar "g_obj_alliedtext2"            "The"
+	setcvar "g_obj_alliedtext3"  "Communications Blackout"
+
+	setcvar "g_obj_axistext1" ""
+	setcvar "g_obj_axistext2" ""
+	setcvar "g_obj_axistext3" "Visit www.Mods-R-us.net" 
+
+	setcvar "g_scoreboardpic" "textures/mohmenu/briefing/briefing6a.tga" 
+	
+	setcvar "g_gametype" "1"
+	
+	waitthread ffa_spawns
+
+	
+	level waittill prespawn
+
+	
+	exec global/ambient.scr m6l2a
+	
+	level waittill spawn
+
+	waitthread setup_game
+
+	
+	//thread Map_Guard
+
+	level.clockside = kills
+
+end
+
+
+tdm_spawns:
+
+ 
+	removeclass actor
+	removeclass ammoentity
+	
+
+	// Stage 1 Axis
+	spawn info_player_axis "origin" "-2108.88 -584.72 36.13" "angle" "48" "targetname" "X1"
+	spawn info_player_axis "origin" "-1962.48 -168.38 38.87" "angle" "-50" "targetname" "X2"
+	spawn info_player_axis "origin" "-1762.22 -476.87 56.13" "angle" "-77" "targetname" "X3"
+	spawn info_player_axis "origin" "-1310.29 -564.81 60.99" "angle" "-133" "targetname" "X4"
+	spawn info_player_axis "origin" "-1283.76 -756.02 78.37" "angle" "-155" "targetname" "X5"
+
+	spawn info_player_axis "origin" "-1760.88 -956.26 96.57" "angle" "-52" "targetname" "X6" 
+	spawn info_player_axis "origin" "64.87 -808.91 120.13" "angle" "178" "targetname" "X7"
+	spawn info_player_axis "origin" "64.87 -375.13 120.13" "angle" "-123" "targetname" "X8"
+	spawn info_player_axis "origin" "-172.87 -375.13 120.13" "angle" "-83" "targetname" "X9"
+	spawn info_player_axis "origin" "-382.98 -556.76 120.13" "angle" "-81" "targetname" "X10"
+
+	spawn info_player_axis "origin" "-143.13 -1232.88 120.13" "angle" "108" "targetname" "X11"
+	spawn info_player_axis "origin" "240.58 -1909.09 112.13" "angle" "97" "targetname" "X12"
+	spawn info_player_axis "origin" "645.91 -1976.42 112.13" "angle" "138" "targetname" "X13"
+	spawn info_player_axis "origin" "311.13 -2606.48 120.13" "angle" "74" "targetname" "X14"
+	spawn info_player_axis "origin" "971.41 -2608.88 120.13" "angle" "144" "targetname" "X15"
+
+
+
+	// Stage 1 Allies
+	spawn info_player_allied "origin" "-4141.45 -3497.07 9.41" "angle" "30" "targetname" "A1"
+	spawn info_player_allied "origin" "-4311.60 -3477.69 5.51" "angle" "18" "targetname" "A2"
+	spawn info_player_allied "origin" "-4306.31 -2982.14 1.77" "angle" "-30" "targetname" "A3"
+	spawn info_player_allied "origin" "-4446.70 -3011.93 0.73" "angle" "-22" "targetname" "A4"
+	spawn info_player_allied "origin" "-3936.88 -3033.72 4.13" "angle" "-62" "targetname" "A5" 
+
+	spawn info_player_allied "origin" "-3568.87 -3472.76 116.47" "angle" "68" "targetname" "A6"
+	spawn info_player_allied "origin" "-3560.88 -3023.13 8.13" "angle" "-39" "targetname" "A7"
+	spawn info_player_allied "origin" "-3436.59 -3023.13 8.13" "angle" "-80" "targetname" "A8"
+	spawn info_player_allied "origin" "-2940.87 -3736.88 8.13" "angle" "77" "targetname" "A9"
+	spawn info_player_allied "origin" "-2728.13 -3694.82 8.13" "angle" "128" "targetname" "A10"
+
+	spawn info_player_allied "origin" "-2960.88 -3472.87 8.13" "angle" "12" "targetname" "A11"
+	spawn info_player_allied "origin" "-2337.97 -2602.59 8.13" "angle" "-128" "targetname" "A12"
+	spawn info_player_allied "origin" "-2343.36 -2461.45 8.13" "angle" "-122" "targetname" "A13"
+	spawn info_player_allied "origin" "-3077.22 -2776.88 22.13" "angle" "29" "targetname" "A14"
+	spawn info_player_allied "origin" "-2360.88 -3960.88 -39.88" "angle" "21" "targetname" "A15"
+
+
+	/*
+	
+	//  Player Blocker
+	spawn script_object "targetname" "blocker1" 
+	$blocker1.origin = ( 339.17 1365.41 -543.63 )
+	$blocker1 setsize ( -30 -1 -1 ) ( 30 1 150 )
+	$blocker1 solid
+	$blocker1 nodamage
+
+	spawn trigger_multiple "targetname" "blocktrig"
+	$blocktrig.origin = ( 339.17 1365.41 -543.63 )
+	$blocktrig setsize ( -30 -5 -1 ) ( 30 5 150 )
+	$blocktrig message "Wrong Way Soldier - Turn Around"
+	
+	*/
+
+	//level.springfield = 1								
+	level.bar = 1								
+	level.bazooka = 1
+	level.panzer = 1 
+	//level.mp44 = 1		
+	level.shotgun = 1
+	level.rifle = 1
+
+	
+end
+
+
+ffa_spawns: 
+
+	removeclass actor
+	removeclass ammoentity
+
+	spawn info_player_deathmatch "origin" "1958.12 -2967.14 328.13" "angle" "-137"
+	spawn info_player_deathmatch "origin" "63.13 -2344.87 120.13" "angle" "16"
+	spawn info_player_deathmatch "origin" "39.31 -864.87 120.13" "angle" "129"
+	spawn info_player_deathmatch "origin" "-858.65 -1279.13 -119.88" "angle" "-109"
+	spawn info_player_deathmatch "origin" "136.87 -2008.13 -87.88" "angle" "-142"
+
+	spawn info_player_deathmatch "origin" "356.87 -3331.13 -127.88" "angle" "-157"
+	spawn info_player_deathmatch "origin" "1456.86 -3568.31 136.13" "angle" "139"
+	spawn info_player_deathmatch "origin" "-655.13 -3352.87 -63.88" "angle" "125"
+	spawn info_player_deathmatch "origin" "-1517.08 -4683.96 -167.88" "angle" "85"
+	spawn info_player_deathmatch "origin" "-2761.41 -3736.87 8.13" "angle" "118"
+
+	spawn info_player_deathmatch "origin" "-3930.31 -3025.76 4.13" "angle" "-77"
+	spawn info_player_deathmatch "origin" "-3502.88 -2470.87 8.13" "angle" "31"
+	spawn info_player_deathmatch "origin" "-2263.69 -1847.96 8.13" "angle" "-177"
+	spawn info_player_deathmatch "origin" "-3992.87 105.53 0.13" "angle" "-7"
+	spawn info_player_deathmatch "origin" "-1255.13 -527.13 57.56" "angle" "-140"
+
+	
+	//level.springfield = 1								
+	level.bar = 1								
+	level.bazooka = 1
+	level.panzer = 1 
+	//level.mp44 = 1		
+	level.shotgun = 1
+	level.rifle = 1
+
+end
+
+
+
+setup_game:
+
+	$explodersmashed remove
+	$exploderchunk remove
+
+	level.farplaneswitching = 0 	
+	level.farplane = 1600
+	level.farplane_color = ".1 .1 .2"
+
+	$world farplane level.farplane
+	$world farplane_color level.farplane_color
+
+	$objective1_fireball1 remove
+	$objective1_fireball2 remove
+	$objective1_fireball3 remove
+	$objective1_fireball4 remove
+	$objective1_fireball5 remove
+	$objective1_fireball6 remove
+	$objective1_fireball7 remove
+
+	$cp1_bomb1 remove
+	$cp1_bomb2 remove
+	$cp1_bomb3 remove
+	$cp2_bomb1 remove
+	$cp2_bomb2 remove
+	$cp2_bomb3 remove
+
+	$health1 remove
+	$health2 remove
+	$health3 remove
+	$health4 remove
+	$health5 remove
+	$health6 remove
+	
+end
+
+
+
+piano:
+	$pianospeaker playsound moh_piano
+end
+
+cello:
+	$cellospeaker playsound moh_cello
+end
+
+
+locked_gate_sound:
+	self playsound gate_metal_locked
+end
+
+locked_iron_gate_sound:
+	self playsound gate_iron_locked
+end
+
+
+
+
+// Under Map Protection - Probably not needed in this map - not threaded to/coords will need edited if used.
+Map_Guard:
+
+	spawn trigger_multipleall "targetname" "Killah"
+	$Killah.origin = ( -1925.47 -2150.12 1536.13 ) 
+	$Killah setsize ( -9999 -9999 -900 ) ( 9999 9999 2 )
+	$Killah setthread die
+	
+end
+
+die:
+	
+	iprintln "*** - Map_Guard Triggered - ***"
+	local.punk = parm.other
+	if!(isalive local.punk)
+	{
+	end
+	}
+	local.punk thread spawn_fx2 models/animate/explosion_bridge.tik 
+end
+
+
+
+spawn_fx2 local.fx:
+	local.temp = spawn script_model model local.fx
+	local.temp.origin = self.origin
+	local.temp.scale = .3
+	local.temp playsound gas_explode1
+	local.temp anim start
+	radiusdamage local.temp 120 120
+	wait 3
+	local.temp remove
+end
+
+
+// End some labels
+alarm_player_reset:
+end
+farplane_near:
+end
+farplane_far:
+end
+cp2_bombplant3:
+end
+cp2_bombplant2:
+end
+cp2_bombplant1:
+end
+cp1_bombplant3:
+end
+cp1_bombplant2:
+end
+m6l2a_changelevel:
+end
+cp1_bombplant1:
+end
+scene3_spawn1_terminate:
+end
+objective2_alarm:
+end
+alarm_control:
+end
+
+
+// Cobs
+

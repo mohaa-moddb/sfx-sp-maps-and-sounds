@@ -1,0 +1,38 @@
+main local.command:
+
+	if(level.bar != 1)
+	{
+	end
+	}
+
+
+	thread local.command
+
+
+
+end
+
+reload:
+
+self playsound bar_snd_reload
+
+end
+
+
+shoot:
+
+self playsound bar_snd_fire
+
+end
+
+raise:
+
+self playsound bar_snd_pullout
+
+end
+
+putaway:
+
+self playsound bar_snd_putaway
+
+end

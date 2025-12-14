@@ -1,0 +1,48 @@
+main local.command:
+
+	if(level.panzer != 1)
+	{
+	end
+	}
+
+
+	thread local.command
+
+
+
+end
+
+reload:
+
+self playsound panzerschreck_snd_reload
+
+end
+
+
+shoot:
+
+self playsound panzerschreck_snd_fire
+
+end
+
+raise:
+
+if(level.bazooka != 1)
+{
+end
+}
+
+self playsound snd_bazooka_pullout
+
+end
+
+putaway:
+
+if(level.bazooka != 1)
+{
+end
+}
+
+self playsound snd_bazooka_putaway
+
+end
